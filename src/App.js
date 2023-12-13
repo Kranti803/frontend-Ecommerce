@@ -1,13 +1,14 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Layouts/Header";
+import Home from "./components/Home/Home";
 
 function App() {
   return (
    <Router>
    <Header/>
     <Routes>
-      <Route path="/" element={''}/>
+      <Route path="/" element={<Home/>}/>
     </Routes>
    </Router>
   );

@@ -10,6 +10,8 @@ const Header = () => {
   const isAuthenticated = true;
   const [nav, setNav] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  // automatically close the side nav on larger screen
   useEffect(() => {
     const handleResize = () => {
       setScreenWidth(window.innerWidth);
@@ -17,13 +19,14 @@ const Header = () => {
     };
     window.addEventListener("resize", handleResize);
 
+    //clean up function for event listners..
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, [screenWidth]);
 
   return (
-    <nav className="flex items-center justify-between h-[70px] px-1 md:px-4 border-1 border-[#9c9c9cc4] border-b-[1px]">
+    <nav className="flex items-center justify-between h-[70px] px-[6px] md:px-4">
       <h2 className=" hidden md:block text-[18px] md:text-[24px] font-[700] font-[Inter]">
         DazzleMart
       </h2>
@@ -60,8 +63,9 @@ const Header = () => {
         <button>
           <FaRegHeart size={20} />
         </button>
-        <button>
+        <button className="relative">
           <BsCart3 size={20} />
+          <span className="font-semibold text-[#5e34d3] absolute top-[-30%] right-0">2</span>
         </button>
       </aside>
 
