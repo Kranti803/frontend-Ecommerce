@@ -28,7 +28,7 @@ const Header = () => {
   return (
     <nav className="flex items-center justify-between h-[70px] px-[6px] md:px-4">
       <h2 className=" hidden md:block text-[18px] md:text-[24px] font-[700] font-[Inter]">
-        DazzleMart
+        Dazzlemart
       </h2>
       <button onClick={() => setNav(true)} className="text-black md:hidden">
         <GiHamburgerMenu size={25} />
@@ -71,7 +71,7 @@ const Header = () => {
 
       {/**************************mobile nav ******************************/}
       <aside
-        className={`text-white absolute h-full w-[60%] top-0 left-0 bg-black p-4 duration-200 ease-in ${
+        className={`text-white absolute z-10 h-full w-[60%] top-0 left-0 bg-black p-4 duration-200 ease-in ${
           nav ? "translate-x-[0%]" : "translate-x-[-150%]"
         }`}
       >
