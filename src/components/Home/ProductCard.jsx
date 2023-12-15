@@ -1,14 +1,15 @@
 import React from "react";
-import gamepad from "../../assets/gamepad.png";
+import monitor from "../../assets/monitor.png";
 import { FaRegHeart } from "react-icons/fa";
 import { IoIosStar } from "react-icons/io";
 import { Link } from "react-router-dom";
 
 const ProductCard = ({ newProduct }) => {
   return (
-    <div className="max-w-[250px] max-h-[300px] font-[poppins] relative flex-shrink-0">
+    <div className="max-w-[230px] max-h-[340px] font-[poppins] relative flex-shrink-0">
       <div className="max-h-[250px] w-full bg-[#F5F5F5]">
-        <img src={gamepad} alt="" className="w-full h-full" />
+        <img src={monitor} alt="" className="w-full h-full p-8 bg-inherit" />
+        <button className="bg-black text-white w-full text-sm py-2">Add To Cart</button>
       </div>
       <div className="absolute top-2 w-full flex justify-end px-2">
         <button className="borrder-none outline-none bg-[#ffffff] h-[25px] w-[25px] flex items-center justify-center p-[2px] rounded-full">

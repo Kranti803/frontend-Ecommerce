@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { FaRegHeart } from "react-icons/fa";
 import { IoIosSearch, IoMdClose } from "react-icons/io";
 import { BsCart3 } from "react-icons/bs";
-import { GiHamburgerMenu } from "react-icons/gi";
+import { RxHamburgerMenu } from "react-icons/rx";
 import { navLinks } from "../../constants";
 
 const Header = () => {
-  const isAuthenticated = true;
+  const isAuthenticated = false;
   const [nav, setNav] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
@@ -28,10 +28,10 @@ const Header = () => {
   return (
     <nav className="flex items-center justify-between h-[70px] px-[6px] md:px-4">
       <h2 className=" hidden md:block text-[18px] md:text-[24px] font-[700] font-[Inter]">
-        Dazzlemart
+        Exclusive
       </h2>
       <button onClick={() => setNav(true)} className="text-black md:hidden">
-        <GiHamburgerMenu size={25} />
+        <RxHamburgerMenu size={25} />
       </button>
       <ul className="hidden md:flex gap-8 font-[poppins]">
         {navLinks.map((item) => (
@@ -65,7 +65,9 @@ const Header = () => {
         </button>
         <button className="relative">
           <BsCart3 size={20} />
-          <span className="font-semibold text-[#5e34d3] absolute top-[-30%] right-0">2</span>
+          <span className="font-semibold bg-black absolute top-[-30%] right-0 h-[18px] w-[18px] rounded-full text-center text-[10px] text-white">
+            0
+          </span>
         </button>
       </aside>
 
@@ -76,12 +78,12 @@ const Header = () => {
         }`}
       >
         <div className="flex justify-between">
-          <h2 className="text-xl font-[700] font-[Inter]">DazzleMart</h2>
+          <h2 className="text-xl font-[700] font-[Inter]">Exclusive</h2>
           <button onClick={() => setNav(false)}>
             <IoMdClose size={25} />
           </button>
         </div>
-        <ul className=" text-lg flex flex-col gap-14 py-8 font-[poppins]">
+        <ul className=" text-lg flex flex-col items-center gap-14 py-8 font-[poppins]">
           {navLinks.map((item) => (
             <li onClick={() => setNav(false)} key={item.id}>
               <Link to={item.link}>{item.name}</Link>
