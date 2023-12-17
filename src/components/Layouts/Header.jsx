@@ -7,7 +7,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { navLinks } from "../../constants";
 
 const Header = () => {
-  const isAuthenticated = false;
+  const isAuthenticated = true;
   const [nav, setNav] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
@@ -18,7 +18,6 @@ const Header = () => {
       if (screenWidth > 768) setNav(false);
     };
     window.addEventListener("resize", handleResize);
-
     //clean up function for event listners..
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -49,12 +48,12 @@ const Header = () => {
           </li>
         )}
       </ul>
-      <aside className="flex gap-4">
-        <div className="flex gap-1 rounded-sm bg-[#F5F5F5] p-2">
+      <aside className="flex gap-2 sm:gap-4">
+        <div className="flex gap-1 w-full rounded-sm bg-[#F5F5F5] p-2">
           <input
-            className=" text-xs outline-none bg-transparent"
+            className=" text-xs outline-none bg-transparent w-full"
             type="text"
-            placeholder="What are you looking for ?"
+            placeholder="Search products"
           />
           <button>
             <IoIosSearch />
@@ -63,12 +62,12 @@ const Header = () => {
         <button>
           <FaRegHeart size={20} />
         </button>
-        <button className="relative">
+        <Link to={'/cart'} className="relative flex items-center">
           <BsCart3 size={20} />
-          <span className="font-semibold bg-black absolute top-[-30%] right-0 h-[18px] w-[18px] rounded-full text-center text-[10px] text-white">
+          <span className="font-semibold bg-black absolute top-[-25%] right-0 h-[18px] w-[18px] rounded-full text-center text-[10px] text-white">
             0
           </span>
-        </button>
+        </Link>
       </aside>
 
       {/**************************mobile nav ******************************/}
