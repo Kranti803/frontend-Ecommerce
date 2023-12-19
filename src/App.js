@@ -10,6 +10,8 @@ import Login from './components/Autentication/Login'
 import SignUp from "./components/Autentication/SignUp";
 import User from "./components/User/User";
 import Cart from "./components/Cart/Cart";
+import BillingDetails from "./components/BillingDetails/BillingDetails";
+import ProductDetails from "./components/ProductDetails/ProductDetails";
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/profile" element={<User />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/billingdetails" element={<BillingDetails />} />
+        <Route path="/productdetails" element={<ProductDetails />} />
       </Routes>
       <Footer />
     </Router>

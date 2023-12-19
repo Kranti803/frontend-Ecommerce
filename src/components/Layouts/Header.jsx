@@ -64,7 +64,7 @@ const Header = () => {
         </button>
         <Link to={'/cart'} className="relative flex items-center">
           <BsCart3 size={20} />
-          <span className="font-semibold bg-black absolute top-[-25%] right-0 h-[18px] w-[18px] rounded-full text-center text-[10px] text-white">
+          <span className="font-semibold bg-[#DB4444] absolute top-[-13%] right-0 h-[16px] w-[16px] rounded-full text-center text-[10px] text-white">
             0
           </span>
         </Link>
