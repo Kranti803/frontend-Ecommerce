@@ -59,9 +59,9 @@ const Header = () => {
             <IoIosSearch />
           </button>
         </div>
-        <button>
+        <Link to={'/wishlist'} className="flex items-center">
           <FaRegHeart size={20} />
-        </button>
+        </Link>
         <Link to={'/cart'} className="relative flex items-center">
           <BsCart3 size={20} />
           <span className="font-semibold bg-[#DB4444] absolute top-[-13%] right-0 h-[16px] w-[16px] rounded-full text-center text-[10px] text-white">

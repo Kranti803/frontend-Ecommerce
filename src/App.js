@@ -12,6 +12,8 @@ import User from "./components/User/User";
 import Cart from "./components/Cart/Cart";
 import BillingDetails from "./components/BillingDetails/BillingDetails";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
+import Wishlist from "./components/Wishlist/Wishlist";
+import Dashboard from "./components/Admin/Dashboard/Dashboard";
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/billingdetails" element={<BillingDetails />} />
         <Route path="/productdetails" element={<ProductDetails />} />
+        <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/admin/dashboard" element={<Dashboard />} />
       </Routes>
       <Footer />
     </Router>
