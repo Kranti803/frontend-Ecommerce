@@ -18,7 +18,6 @@ const Header = () => {
       if (screenWidth > 768) setNav(false);
     };
     window.addEventListener("resize", handleResize);
-    //clean up function for event listners..
     return () => {
       window.removeEventListener("resize", handleResize);
     };
