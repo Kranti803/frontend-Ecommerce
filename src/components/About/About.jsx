@@ -3,8 +3,8 @@ import aboutImg from "../../assets/aboutImg.png";
 import Services from "./../Home/Services";
 const About = () => {
   return (
-    <section className="p-4 lg:p-0 lg:w-[80%] m-auto mt-4">
-      <div className=" flex flex-col sm:flex-row gap-4 text-center sm:text-left mb-8">
+    <section className="min-h-screen p-4 lg:p-0 lg:w-[80%] m-auto mt-4">
+      <div className=" flex flex-col md:flex-row gap-4 text-center md:text-left mb-8">
         <img src={aboutImg} alt="" className="w-full md:w-1/2 h-full" />
         <div className="w-full md:w-1/2">
           <h2 className="text-[30px] md:text-[54px] font-[Inter] pb-2">

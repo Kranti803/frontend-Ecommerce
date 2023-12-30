@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const ProductCard = ({ newProduct }) => {
   return (
-    <div className="max-w-[230px] max-h-[340px] font-[poppins] relative flex-shrink-0">
+    <div className="max-w-[250px] max-h-[400px] font-[poppins] relative flex-shrink-0">
       <div className="max-h-[250px] w-full bg-[#F5F5F5]">
         <img src={monitor} alt="" className="w-full h-full p-8 bg-inherit" />
         <button className="bg-black text-white w-full text-sm py-2">Add To Cart</button>

@@ -35,7 +35,7 @@ const User = () => {
                 id="name"
                 name="name"
                 type="text"
-                className="block w-full bg-[#F5F5F5] rounded-sm border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 border-none outline-none sm:text-sm sm:leading-6 px-2 "
+                className="block w-full bg-[#F5F5F5] rounded-sm border-0 py-1.5 text-black shadow-sm placeholder:text-gray-400 border-none outline-none sm:text-sm sm:leading-6 px-2 "
               />
             </div>
           </div>
@@ -51,7 +51,7 @@ const User = () => {
                 id="email"
                 name="email"
                 type="email"
-                className="block w-full bg-[#F5F5F5] rounded-sm border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 border-none outline-none sm:text-sm sm:leading-6 px-2 "
+                className="block w-full bg-[#F5F5F5] rounded-sm border-0 py-1.5 text-black shadow-sm placeholder:text-gray-400 border-none outline-none sm:text-sm sm:leading-6 px-2 "
               />
             </div>
           </div>
@@ -67,7 +67,7 @@ const User = () => {
                 id="oldpassword"
                 name="oldpassword"
                 type="password"
-                className="block w-full bg-[#F5F5F5] rounded-sm border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 border-none outline-none sm:text-sm sm:leading-6 px-2 "
+                className="block w-full bg-[#F5F5F5] rounded-sm border-0 py-1.5 text-black shadow-sm placeholder:text-gray-400 border-none outline-none sm:text-sm sm:leading-6 px-2 "
               />
             </div>
           </div>
@@ -83,7 +83,7 @@ const User = () => {
                 id="newpassword"
                 name="newpassword"
                 type="password"
-                className="block w-full bg-[#F5F5F5] rounded-sm border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 border-none outline-none sm:text-sm sm:leading-6 px-2 "
+                className="block w-full bg-[#F5F5F5] rounded-sm border-0 py-1.5 text-black shadow-sm placeholder:text-gray-400 border-none outline-none sm:text-sm sm:leading-6 px-2 "
               />
             </div>
           </div>

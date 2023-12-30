@@ -31,9 +31,9 @@ const Hero = () => {
       showThumbs={false}
       infiniteLoop={true}
     >
-      {carousel.map((item) => (
+      {carousel.map((item,index) => (
         <div
-          key={item.index}
+          key={index}
           className=" relative h-[40vh] md:h-[55vh] bg-black flex text-white font-[Inter]"
         >
           <img

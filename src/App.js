@@ -14,11 +14,15 @@ import BillingDetails from "./components/BillingDetails/BillingDetails";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import Wishlist from "./components/Wishlist/Wishlist";
 import Dashboard from "./components/Admin/Dashboard/Dashboard";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
   return (
     <Router>
       <Header />
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />

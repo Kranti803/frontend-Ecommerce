@@ -4,7 +4,7 @@ import iconMail from "../../assets/icons-mail.png";
 
 const Contact = () => {
   return (
-    <section className="p-4 lg:p-0 lg:w-[80%] m-auto mt-4 flex flex-wrap-reverse min-h-[calc(100vh-100px)]">
+    <section className="p-4 lg:p-0 lg:w-[80%] m-auto mt-12 flex flex-wrap-reverse min-h-[calc(100vh-100px)]">
       <div className="flex flex-col gap-2 w-full md:w-1/2 md:pr-4">
         <div className="border-b-2 border-gray-400 pb-2">
           <aside className="flex items-center gap-3  ">

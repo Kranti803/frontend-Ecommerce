@@ -1,9 +1,54 @@
-import React from "react";
+import { React, useState } from "react";
 import ShoppingCartImg from "../../assets/shoppingCart.png";
 import { Link } from "react-router-dom";
-import GoogleIcon from '../../assets/Icon-Google.png'
+import GoogleIcon from "../../assets/Icon-Google.png";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import {
+  getProfileSuccess,
+  getProfileRequest,
+  getProfileFailure,
+  clearError,
+  clearMessage,
+} from "../../redux/reducers/userSlice";
 
 const SignUp = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const dispatch = useDispatch();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      dispatch(getProfileRequest());
+
+      const {data} = await axios.post(
+        "http://localhost:8000/api/v1/register",
+        formData,
+        {
+          withCredentials: true,
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      );
+      dispatch(getProfileSuccess(data));
+    } catch (error) {
+      dispatch(getProfileFailure(error.message));
+    }
+  };
   return (
     <div className="flex min-h-[calc(100vh-75px)] flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -18,7 +63,7 @@ const SignUp = () => {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" action="#" method="POST">
+        <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
             <label
               htmlFor="email"
@@ -28,10 +73,12 @@ const SignUp = () => {
             </label>
             <div className="mt-2">
               <input
+                onChange={handleInputChange}
                 id="name"
                 name="name"
+                value={formData.name}
                 type="text"
-                className="block w-full bg-[#F5F5F5] rounded-sm border-0 py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 border-none outline-none sm:text-sm sm:leading-6 px-2 "
+                className="block w-full bg-[#F5F5F5] rounded-sm border-0 py-1.5 text-black shadow-sm placeholder:text-gray-400 border-none outline-none sm:text-sm sm:leading-6 px-2 "
               />
             </div>
           </div>
@@ -44,12 +91,13 @@ const SignUp = () => {
             </label>
             <div className="mt-2">
               <input
+                onChange={handleInputChange}
+                value={formData.email}
                 id="email"
                 name="email"
                 type="email"
-                autoComplete="email"
                 required
-                className="block w-full rounded-sm border-0 bg-[#F5F5F5] py-1.5 text-black shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 border-none outline-none sm:text-sm sm:leading-6 px-2 "
+                className="block w-full rounded-sm border-0 bg-[#F5F5F5] py-1.5 text-black shadow-sm placeholder:text-gray-400 border-none outline-none sm:text-sm sm:leading-6 px-2 "
               />
             </div>
           </div>
@@ -65,12 +113,13 @@ const SignUp = () => {
             </div>
             <div className="mt-2">
               <input
+                onChange={handleInputChange}
+                value={formData.password}
                 id="password"
                 name="password"
                 type="password"
-                autoComplete="current-password"
                 required
-                className="block w-full rounded-sm border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 bprder-none outline-none px-2 placeholder:text-gray-400 sm:text-sm sm:leading-6 bg-[#F5F5F5]"
+                className="block w-full rounded-sm border-0 py-1.5 text-gray-900 shadow-sm border-none outline-none px-2 placeholder:text-gray-400 sm:text-sm sm:leading-6 bg-[#F5F5F5]"
               />
             </div>
           </div>
@@ -88,7 +137,7 @@ const SignUp = () => {
               type="submit"
               className="flex gap-4 w-full items-center justify-center rounded-sm text-black px-3 py-1.5 text-sm font-semibold leading-6 border-2 border-gray-300 outline-none text-[poppins]"
             >
-            <img src={GoogleIcon} alt="" className="h-[20px] w-[20px]" />
+              <img src={GoogleIcon} alt="" className="h-[20px] w-[20px]" />
               <span>Sign up with google</span>
             </Link>
           </div>

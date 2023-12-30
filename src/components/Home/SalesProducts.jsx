@@ -17,10 +17,10 @@ const SalesProducts = () => {
       <div className="flex items-center justify-between pb-4">
         <div>
           <div className="flex gap-2 items-center">
-            <span className="h-[24px] w-[24px] bg-[#DB4444]"></span>
+            <span className="h-[20px] w-[20px] bg-[#DB4444]"></span>
             <span className="text-xs font-bold text-[#DB4444]">Today's</span>
           </div>
-          <h3 className=" text-2xl md:text-[36px] font-[Inter]">Flash Sales</h3>
+          <h3 className=" text-2xl md:text-[28px] font-[Inter]">Flash Sales</h3>
         </div>
         <div className="hidden md:flex gap-4">
           <button
@@ -39,7 +39,7 @@ const SalesProducts = () => {
       </div>
       <div
         id="slider_container"
-        className=" flex gap-4 overflow-x-scroll scroll-smooth no-scrollbar"
+        className=" flex gap-8 overflow-x-scroll scroll-smooth no-scrollbar"
       >
         <ProductCard />
         <ProductCard />
