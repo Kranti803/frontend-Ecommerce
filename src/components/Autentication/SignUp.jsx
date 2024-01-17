@@ -1,17 +1,10 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import ShoppingCartImg from "../../assets/shoppingCart.png";
 import { Link } from "react-router-dom";
-import GoogleIcon from "../../assets/Icon-Google.png";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../../redux/thunks/authThunk";
 import { toast } from "react-toastify";
-import axios from "axios";
-import { useDispatch } from "react-redux";
-import {
-  getProfileSuccess,
-  getProfileRequest,
-  getProfileFailure,
-  clearError,
-  clearMessage,
-} from "../../redux/reducers/userSlice";
+import { clearError, clearMessage } from "../../redux/slices/authSlice";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -28,27 +21,23 @@ const SignUp = () => {
   };
 
   const dispatch = useDispatch();
+  const { error, message } = useSelector((state) => state.auth);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      dispatch(getProfileRequest());
-
-      const {data} = await axios.post(
-        "http://localhost:8000/api/v1/register",
-        formData,
-        {
-          withCredentials: true,
-          headers: {
-            "Content-type": "application/json",
-          },
-        }
-      );
-      dispatch(getProfileSuccess(data));
-    } catch (error) {
-      dispatch(getProfileFailure(error.message));
-    }
+    dispatch(registerUser(formData));
   };
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch(clearError());
+    }
+    if (message) {
+      toast.success(message);
+      dispatch(clearMessage());
+    }
+  }, [error, message, dispatch]);
+
   return (
     <div className="flex min-h-[calc(100vh-75px)] flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -118,6 +107,7 @@ const SignUp = () => {
                 id="password"
                 name="password"
                 type="password"
+                minLength={8}
                 required
                 className="block w-full rounded-sm border-0 py-1.5 text-gray-900 shadow-sm border-none outline-none px-2 placeholder:text-gray-400 sm:text-sm sm:leading-6 bg-[#F5F5F5]"
               />
@@ -132,15 +122,7 @@ const SignUp = () => {
               Create Account
             </button>
           </div>
-          <div>
-            <Link
-              type="submit"
-              className="flex gap-4 w-full items-center justify-center rounded-sm text-black px-3 py-1.5 text-sm font-semibold leading-6 border-2 border-gray-300 outline-none text-[poppins]"
-            >
-              <img src={GoogleIcon} alt="" className="h-[20px] w-[20px]" />
-              <span>Sign up with google</span>
-            </Link>
-          </div>
+         
         </form>
 
         <p className="mt-10 text-center text-sm text-gray-500">

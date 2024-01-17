@@ -1,18 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { updateUserProfile } from "../../redux/thunks/userThunk";
+import { toast } from "react-toastify";
+import { clearError, clearMessage } from "../../redux/slices/userSlice";
 
 const User = () => {
-  const isAuthenticated = false;
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    currentPassword: "",
+    newPassword: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const isAdmin = true;
+  const dispatch = useDispatch();
+  const { error, message, updatedUser } = useSelector((state) => state.user);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(updateUserProfile(formData));
+    setFormData({ name: "", email: "", currentPassword: "", newPassword: "" });
+  };
+
+  useEffect(() => {
+    if (message) {
+      toast.success(message);
+      dispatch(clearMessage());
+    }
+    if (error) {
+      toast.error(error);
+      dispatch(clearError());
+    }
+  }, [dispatch, error, message]);
   return (
     <section className="p-4 lg:p-0 lg:w-[80%] m-auto mt-4 min-h-screen">
       <div className="flex justify-end items-end flex-col">
         <h1 className="text-xs font-semibold font-[poppins]">
-          Welcome, <span className="text-[#DB4444]">Kranti</span>
+          Welcome, <span className="text-[#DB4444]">{updatedUser?.name}</span>
         </h1>
-        {isAuthenticated && (
+        {isAdmin && (
           <Link
             to={"/dashboard"}
-            className="bg-[#DB4444] px-3 rounded-sm text-white font-[Inter] py-2"
+            className="bg-[#DB4444] px-3 rounded-sm text-white font-[Inter] py-2 mt-2"
           >
             Dashboard
           </Link>
@@ -22,7 +56,7 @@ const User = () => {
         <h2 className="text-xl font-[Inter] text-[#BB4444]">Edit Profile</h2>
       </div>
       <div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div>
             <label
               htmlFor="name"
@@ -35,6 +69,8 @@ const User = () => {
                 id="name"
                 name="name"
                 type="text"
+                value={formData.name}
+                onChange={handleInputChange}
                 className="block w-full bg-[#F5F5F5] rounded-sm border-0 py-1.5 text-black shadow-sm placeholder:text-gray-400 border-none outline-none sm:text-sm sm:leading-6 px-2 "
               />
             </div>
@@ -51,6 +87,8 @@ const User = () => {
                 id="email"
                 name="email"
                 type="email"
+                value={formData.email}
+                onChange={handleInputChange}
                 className="block w-full bg-[#F5F5F5] rounded-sm border-0 py-1.5 text-black shadow-sm placeholder:text-gray-400 border-none outline-none sm:text-sm sm:leading-6 px-2 "
               />
             </div>
@@ -65,8 +103,10 @@ const User = () => {
             <div className="mt-2">
               <input
                 id="oldpassword"
-                name="oldpassword"
+                name="currentPassword"
                 type="password"
+                value={formData.currentPassword}
+                onChange={handleInputChange}
                 className="block w-full bg-[#F5F5F5] rounded-sm border-0 py-1.5 text-black shadow-sm placeholder:text-gray-400 border-none outline-none sm:text-sm sm:leading-6 px-2 "
               />
             </div>
@@ -81,8 +121,11 @@ const User = () => {
             <div className="mt-2">
               <input
                 id="newpassword"
-                name="newpassword"
+                name="newPassword"
                 type="password"
+                value={formData.newPassword}
+                onChange={handleInputChange}
+                minLength={8}
                 className="block w-full bg-[#F5F5F5] rounded-sm border-0 py-1.5 text-black shadow-sm placeholder:text-gray-400 border-none outline-none sm:text-sm sm:leading-6 px-2 "
               />
             </div>
@@ -94,9 +137,6 @@ const User = () => {
             Update Profile
           </button>
         </form>
-      </div>
-      <div className=" mt-4 mb-8 w-full">
-        {/* <h2 className="text-[#DB4444] mb-4">Hello, Admin</h2> */}
       </div>
     </section>
   );
