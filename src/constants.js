@@ -3,6 +3,8 @@ import { FaSquarePlus, FaUser } from "react-icons/fa6";
 import { BsStack } from "react-icons/bs";
 import { GrHistory } from "react-icons/gr";
 
+
+
 export const navLinks = [
     {
         id: 1,

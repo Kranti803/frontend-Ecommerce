@@ -2,6 +2,7 @@ import React from "react";
 import { sidebarLinks } from "../../../constants";
 
 const Sidebar = ({setPage,setSidebar}) => {
+  console.log(setSidebar)
 
   return (
     <ul className="flex flex-col gap-12 pt-6 bg-[#49108B] min-h-screen text-white h-full px-4">

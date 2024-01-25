@@ -18,9 +18,10 @@ const User = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const isAdmin = true;
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
   const { error, message, updatedUser } = useSelector((state) => state.user);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(updateUserProfile(formData));
@@ -41,11 +42,14 @@ const User = () => {
     <section className="p-4 lg:p-0 lg:w-[80%] m-auto mt-4 min-h-screen">
       <div className="flex justify-end items-end flex-col">
         <h1 className="text-xs font-semibold font-[poppins]">
-          Welcome, <span className="text-[#DB4444]">{updatedUser?.name}</span>
+          Welcome,{" "}
+          <span className="text-[#DB4444]">
+            {updatedUser?.name || user?.name}
+          </span>
         </h1>
-        {isAdmin && (
+        {user?.role === "admin" && (
           <Link
-            to={"/dashboard"}
+            to={"/admin/dashboard"}
             className="bg-[#DB4444] px-3 rounded-sm text-white font-[Inter] py-2 mt-2"
           >
             Dashboard

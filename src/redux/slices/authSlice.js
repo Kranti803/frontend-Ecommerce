@@ -1,6 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {};
+const initialState = {
+    loading: false,
+    user: null,
+    message: null,
+    error: null,
+    isAuthenticated:false,
+};
 
 export const authSlice = createSlice({
     name: "auth",
@@ -53,7 +59,7 @@ export const authSlice = createSlice({
             state.loading = false;
             state.message = action.payload.message;
             state.user = null;
-            state.isAuthenticated = null;
+            state.isAuthenticated = false;
 
         },
         logoutUserReject: (state, action) => {
@@ -80,7 +86,7 @@ export const authSlice = createSlice({
             state.message = action.payload.message;
 
         },
-        resetPasswordReject: (state,action) => {
+        resetPasswordReject: (state, action) => {
             state.loading = false;
             state.error = action.payload;
         },

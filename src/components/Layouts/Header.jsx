@@ -31,7 +31,7 @@ const Header = () => {
       <button onClick={() => setNav(true)} className="text-black md:hidden">
         <RxHamburgerMenu size={25} />
       </button>
-      <ul className="hidden md:flex gap-6 font-[poppins]">
+      <ul className="hidden md:flex gap-4 font-[poppins]">
         {navLinks.map((item) => (
           <li key={item.id} className="text-[16px]">
             <Link to={item.link}>{item.name}</Link>
@@ -41,6 +41,9 @@ const Header = () => {
           <>
             <li>
               <Link to="/profile">Profile</Link>
+            </li>
+            <li>
+              <Link to="/orders">Orders</Link>
             </li>
             <li>
               <button onClick={logoutHandler}>Logout</button>
@@ -96,6 +99,9 @@ const Header = () => {
             <>
               <li onClick={() => setNav(false)}>
                 <Link to="/profile">Profile</Link>
+              </li>
+              <li onClick={() => setNav(false)}>
+                <Link to="/orders">Orders</Link>
               </li>
               <li onClick={() => setNav(false)}>
                 <button onClick={logoutHandler}>Logout</button>

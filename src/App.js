@@ -10,6 +10,7 @@ import Login from './components/Autentication/Login'
 import SignUp from "./components/Autentication/SignUp";
 import User from "./components/User/User";
 import Cart from "./components/Cart/Cart";
+import Orders from './components/Orders/Orders';
 import BillingDetails from "./components/BillingDetails/BillingDetails";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import Wishlist from "./components/Wishlist/Wishlist";
@@ -22,12 +23,13 @@ import VerifySuccess from "./components/Autentication/VerifySuccess";
 import { clearError, clearMessage } from "./redux/slices/authSlice";
 import ForgotPassword from "./components/Autentication/ForgotPassword";
 import ResetPassword from "./components/Autentication/ResetPassword";
+import ProtectedRoute from './utils/protectedRoute';
 
 
 
 function App() {
 
-  const { error, message } = useSelector(state => state.auth);
+  const { error, message, user, isAuthenticated } = useSelector(state => state.auth);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -51,21 +53,36 @@ function App() {
       <Header />
       <ToastContainer />
       <Routes>
+
+        {/* public routes  */}
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/*" element={<NotFound />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/profile" element={<User />} />
-        <Route path="/cart" element={<Cart />} />
         <Route path="/verifyemail/:id/:token" element={<VerifySuccess />} />
-        <Route path="/forgotpassword" element={<ForgotPassword />}/>
-        <Route path="/resetpassword/:resetToken" element={<ResetPassword />}/>
-        <Route path="/billingdetails" element={<BillingDetails />} />
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
+        <Route path="/resetpassword/:resetToken" element={<ResetPassword />} />
         <Route path="/productdetails" element={<ProductDetails />} />
-        <Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/admin/dashboard" element={<Dashboard />} />
+
+        {/* Protected routes */}
+        <Route element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect={'/'} />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+        </Route>
+
+        <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
+          <Route path="/profile" element={<User />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/billingdetails" element={<BillingDetails />} />
+          <Route path="/wishlist" element={<Wishlist />} />
+        </Route>
+
+        {/* Admin route */}
+        <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} adminRoute={true} isAdmin={user?.role === 'admin' ? true : false} />}>
+          <Route path="/admin/dashboard" element={<Dashboard />} />
+        </Route>
+
       </Routes>
       <Footer />
     </Router>

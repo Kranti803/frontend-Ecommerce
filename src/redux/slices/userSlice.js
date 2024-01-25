@@ -17,6 +17,17 @@ export const userSlice = createSlice({
             state.loading = false;
             state.error = action.payload;
         },
+        contactUsRequest: (state) => {
+            state.loading = true;
+        },
+        contactUsSuccess: (state, action) => {
+            state.loading = false;
+            state.message = action.payload.message;
+        },
+        contactUsError: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
         clearError: (state) => {
             state.error = null;
         },
@@ -25,6 +36,7 @@ export const userSlice = createSlice({
         }
     }
 })
-export const { updateProfileRequest, updateProfileSuccess, updateProfileReject, clearError, clearMessage } = userSlice.actions;
+export const { updateProfileRequest, updateProfileSuccess, updateProfileReject,
+    contactUsError, contactUsRequest, contactUsSuccess, clearError, clearMessage } = userSlice.actions;
 
 export default userSlice.reducer;

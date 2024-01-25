@@ -6,6 +6,7 @@ import AddProduct from "./AddProduct";
 import GetAllUsers from "./GetAllUsers";
 import GetAllOrders from "./GetAllOrders";
 import GetAllProducts from "./GetAllProducts";
+import { useSelector } from "react-redux";
 
 const Dashboard = () => {
   const [sidebar, setSidebar] = useState(false);
@@ -28,10 +29,12 @@ const Dashboard = () => {
     }
   };
 
+  const { user } = useSelector((state) => state.auth);
+
   return (
     <section className="min-h-screen">
       <div className=" flex h-12 justify-end gap-4 items-center bg-[#49108B] text-white px-2 ">
-        <h2 className="text-sm">Hello, Kranti</h2>
+        <h2 className="text-sm">Hello, {user?.name}</h2>
         <button onClick={() => setSidebar(!sidebar)} className="md:hidden">
           <GiHamburgerMenu size={20} />
         </button>
