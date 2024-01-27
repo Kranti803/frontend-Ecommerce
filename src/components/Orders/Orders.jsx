@@ -36,7 +36,7 @@ const Orders = () => {
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead className="font-[poppins]">
-            <tr className="grid grid-cols-5 gap-24 place-items-start mb-4">
+            <tr className="grid grid-cols-5 gap-24 place-items-center mb-4">
               <th className="font-normal">Item</th>
               <th className="font-normal">Status</th>
               <th className="font-normal">Quantity</th>
@@ -59,7 +59,7 @@ export default Orders;
 
 const OrderItem = ({ item }) => {
   return (
-    <tr className="grid grid-cols-5 place-items-start gap-24">
+    <tr className="grid grid-cols-5 place-items-center gap-24 even:bg-[#f4f4f4]">
       <td className="py-4">{item.name}</td>
       <td
         className={`${item.status === "Processing" ? "text-red-600" : "text-green-600"} py-4`}
