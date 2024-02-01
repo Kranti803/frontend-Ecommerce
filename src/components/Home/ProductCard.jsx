@@ -9,7 +9,7 @@ const ProductCard = ({ newProduct }) => {
     <div className="max-w-[250px] max-h-[400px] font-[poppins] relative flex-shrink-0">
       <div className="max-h-[250px] w-full bg-[#F5F5F5]">
         <img src={monitor} alt="" className="w-full h-full p-8 bg-inherit" />
-        <button className="bg-black text-white w-full text-sm py-2">Add To Cart</button>
+        <button className="bg-[#DB4444] text-white w-full text-sm py-2">Add To Cart</button>
       </div>
       <div className="absolute top-2 w-full flex justify-end px-2">
         <button className="borrder-none outline-none bg-[#ffffff] h-[25px] w-[25px] flex items-center justify-center p-[2px] rounded-full">

@@ -28,7 +28,7 @@ const ExploreProducts = () => {
         <ProductCard newProduct={true} />
       </div>
       <div className="flex items-center justify-center">
-        <button className="bg-[#DB4444] p-3 text-white font-[Inter] rounded-md my-8">
+        <button className="bg-[#DB4444] p-3 text-white font-[Inter] rounded-sm my-8">
           View All Products
         </button>
       </div>
