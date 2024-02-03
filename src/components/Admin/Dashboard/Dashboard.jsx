@@ -7,6 +7,8 @@ import GetAllUsers from "./GetAllUsers";
 import GetAllOrders from "./GetAllOrders";
 import GetAllProducts from "./GetAllProducts";
 import { useSelector } from "react-redux";
+import OrderDetail from "./OrderDetail";
+import UpdateProduct from "./UpdateProduct";
 
 const Dashboard = () => {
   const [sidebar, setSidebar] = useState(false);
@@ -21,9 +23,13 @@ const Dashboard = () => {
       case "/admin/users":
         return <GetAllUsers />;
       case "/admin/products":
-        return <GetAllProducts />;
+        return <GetAllProducts setPage={setPage} />;
       case "/admin/orders":
-        return <GetAllOrders />;
+        return <GetAllOrders setPage={setPage} />;
+      case "/admin/orderdetail":
+        return <OrderDetail />;
+      case "/admin/updateproduct":
+        return <UpdateProduct />;
       default:
         return <GetDetails />;
     }
@@ -42,20 +48,22 @@ const Dashboard = () => {
           <GiHamburgerMenu size={20} />
         </button>
       </div>
-        <div className="flex gap-2 min-h-screen relative">
-          <div
-            className={`ease-in-out transition-all duration-600 absolute md:relative md:min-h-screen  md:translate-x-0 md:mr-2 ${
-              sidebar ? "translate-x-0 " : "translate-x-[-150%]"
-            } `}
-          >
-            <Sidebar
-              setPage={setPage}
-              setSidebar={setSidebar}
-              sidebar={sidebar}
-            />
-          </div>
-          <div className="flex-1 h-screen no-scrollbar pt-7 px-4 pb-4 overflow-y-auto">{renderPage()}</div>
+      <div className="flex gap-2 min-h-screen relative">
+        <div
+          className={`ease-in-out transition-all duration-600 absolute md:relative md:min-h-screen  md:translate-x-0 md:mr-2 ${
+            sidebar ? "translate-x-0 " : "translate-x-[-150%]"
+          } `}
+        >
+          <Sidebar
+            setPage={setPage}
+            setSidebar={setSidebar}
+            sidebar={sidebar}
+          />
         </div>
+        <div className="flex-1 h-screen no-scrollbar pt-7 px-4 pb-4 overflow-y-auto">
+          {renderPage()}
+        </div>
+      </div>
     </section>
   );
 };

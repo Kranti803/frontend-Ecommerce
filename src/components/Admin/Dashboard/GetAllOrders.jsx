@@ -1,6 +1,6 @@
 import React from "react";
 
-const GetAllOrders = () => {
+const GetAllOrders = ({ setPage }) => {
   return (
     <section className="bg-white rounded-md px-4 py-2">
       <h2 className=" pb-8 text-xl md:text-2xl text-center font-semibold">
@@ -30,7 +30,10 @@ const GetAllOrders = () => {
                 <button className="text-red-600 text-left hover:text-black">
                   Delete Order
                 </button>
-                <button className="text-red-600 text-left hover:text-black">
+                <button
+                  className="text-red-600 text-left hover:text-black"
+                  onClick={() => setPage("/admin/orderdetail")}
+                >
                   Details
                 </button>
               </td>
@@ -47,7 +50,7 @@ const GetAllOrders = () => {
                 <button className="text-red-600 text-left hover:text-black">
                   Delete Order
                 </button>
-                <button className="text-red-600 text-left hover:text-black">
+                <button className="text-red-600 text-left hover:text-black" onClick={() => setPage("/admin/orderdetail")}>
                   Details
                 </button>
               </td>
