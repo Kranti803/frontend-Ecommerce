@@ -12,6 +12,7 @@ const OrderDetail = () => {
         <div className="flex flex-col gap-y-2 mt-4 font-[poppins] border-b-[1px] border-gray-300">
           <p>User Id : </p>
           <p>Name : </p>
+          <p>Email : </p>
           <p>Address : </p>
           <p>City : </p>
           <p>Phone : </p>

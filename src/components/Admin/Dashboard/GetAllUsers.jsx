@@ -8,12 +8,20 @@ const GetAllUsers = () => {
       </h2>
       <div className="overflow-x-auto">
         <table className="w-full">
-          <thead className="font-[poppins]">
-            <tr className="flex justify-between mb-4 px-2">
-              <th className="font-semibold">Name</th>
-              <th className="font-semibold">Email</th>
-              <th className="font-semibold">Role</th>
-              <th className="font-semibold">Action</th>
+          <thead className="font-[Inter]">
+            <tr className="mb-4">
+              <th className="font-semibold p-3">
+                Name
+              </th>
+              <th className="font-semibold p-3">
+                Email
+              </th>
+              <th className="font-semibold p-3">
+                Role
+              </th>
+              <th className="font-semibold p-3">
+                Action
+              </th>
             </tr>
           </thead>
           <tbody className="font-[poppins]">
@@ -27,25 +35,58 @@ const GetAllUsers = () => {
 
 export default GetAllUsers;
 
-const OrderItem = ({ item }) => {
+const OrderItem = () => {
   return (
     <>
-      <tr className="flex justify-between items-center gap-x-8 even:bg-[#f4f4f4] even:rounded-md px-2">
-        <td className="py-4">Kranti Kumar</td>
-        <td className="py-4">Krantikumar803@gmail.com</td>
-        <td className="py-4 pr-14">user</td>
-        <td className="py-4 flex flex-col gap-3">
-          <button className="text-red-600 text-left hover:text-black">Change Role</button>
-          <button className="text-red-600 text-left hover:text-black">Delete User</button>
+      <tr className="even:bg-[#f4f4f4] even:rounded-md">
+        <td className="p-3 text-center">
+          Kranti Kumar shah
+        </td>
+        <td className="p-3 text-center">
+          Krantikumar803@gmail.com
+        </td>
+        <td className="p-3 text-center">user</td>
+        <td className="p-3 text-center flex flex-col justify-center items-center gap-y-3">
+          <button className="text-red-600 text-left hover:text-black">
+            Change Role
+          </button>
+          <button className="text-red-600 text-left hover:text-black">
+            Delete User
+          </button>
         </td>
       </tr>
-      <tr className="flex justify-between gap-x-8 items-center even:bg-[#f4f4f4] even:rounded-md px-2">
-        <td className="py-4">Kranti Kumar</td>
-        <td className="py-4">Krantikumar803@gmail.com</td>
-        <td className="py-4 pr-14">user</td>
-        <td className="py-4 flex flex-col gap-3">
-          <button className="text-red-600 text-left hover:text-black">Change Role</button>
-          <button className="text-red-600 text-left hover:text-black">Delete User</button>
+      <tr className="even:bg-[#f4f4f4] even:rounded-md">
+        <td className="p-3 text-center">
+          Kranti Kumar shah
+        </td>
+        <td className="p-3 text-center">
+          Krantikumar803@gmail.com
+        </td>
+        <td className="p-3 text-center">user</td>
+        <td className="p-3 text-center flex flex-col justify-center items-center gap-y-3">
+          <button className="text-red-600 text-left hover:text-black">
+            Change Role
+          </button>
+          <button className="text-red-600 text-left hover:text-black">
+            Delete User
+          </button>
+        </td>
+      </tr>
+      <tr className="even:bg-[#f4f4f4] even:rounded-md">
+        <td className="p-3 text-center">
+          Kranti Kumar shah
+        </td>
+        <td className="p-3 text-center">
+          Krantikumar803@gmail.com
+        </td>
+        <td className="p-3 text-center">user</td>
+        <td className="p-3 text-center flex flex-col justify-center items-center gap-y-3">
+          <button className="text-red-600 text-left hover:text-black">
+            Change Role
+          </button>
+          <button className="text-red-600 text-left hover:text-black">
+            Delete User
+          </button>
         </td>
       </tr>
     </>
