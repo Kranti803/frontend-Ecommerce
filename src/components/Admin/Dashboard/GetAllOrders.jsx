@@ -45,6 +45,84 @@ const GetAllOrders = ({ setPage }) => {
                 </button>
               </td>
             </tr>
+            <tr className="even:bg-[#f4f4f4] even:rounded-md">
+              <td className="p-3 text-center">fd5fd54cx4sg5d4sd</td>
+              <td
+                className={`p-3 text-center ${
+                  status === "Placed" ? "text-green-500" : "text-red-500"
+                }`}
+              >
+                Placed
+              </td>
+              <td className="p-3 text-center">5</td>
+              <td className="p-3 text-center">$6577</td>
+              <td className="p-3 flex flex-col gap-y-3 justify-center items-center text-center">
+                <button className="text-red-600 text-left hover:text-black">
+                  Change Status
+                </button>
+                <button className="text-red-600 text-left hover:text-black">
+                  Delete Order
+                </button>
+                <button
+                  className="text-red-600 text-left hover:text-black"
+                  onClick={() => setPage("/admin/orderdetail")}
+                >
+                  Details
+                </button>
+              </td>
+            </tr>
+            <tr className="even:bg-[#f4f4f4] even:rounded-md">
+              <td className="p-3 text-center">fd5fd54cx4sg5d4sd</td>
+              <td
+                className={`p-3 text-center ${
+                  status === "Placed" ? "text-green-500" : "text-red-500"
+                }`}
+              >
+                Placed
+              </td>
+              <td className="p-3 text-center">5</td>
+              <td className="p-3 text-center">$6577</td>
+              <td className="p-3 flex flex-col gap-y-3 justify-center items-center text-center">
+                <button className="text-red-600 text-left hover:text-black">
+                  Change Status
+                </button>
+                <button className="text-red-600 text-left hover:text-black">
+                  Delete Order
+                </button>
+                <button
+                  className="text-red-600 text-left hover:text-black"
+                  onClick={() => setPage("/admin/orderdetail")}
+                >
+                  Details
+                </button>
+              </td>
+            </tr>
+            <tr className="even:bg-[#f4f4f4] even:rounded-md">
+              <td className="p-3 text-center">fd5fd54cx4sg5d4sd</td>
+              <td
+                className={`p-3 text-center ${
+                  status === "Placed" ? "text-green-500" : "text-red-500"
+                }`}
+              >
+                Placed
+              </td>
+              <td className="p-3 text-center">5</td>
+              <td className="p-3 text-center">$6577</td>
+              <td className="p-3 flex flex-col gap-y-3 justify-center items-center text-center">
+                <button className="text-red-600 text-left hover:text-black">
+                  Change Status
+                </button>
+                <button className="text-red-600 text-left hover:text-black">
+                  Delete Order
+                </button>
+                <button
+                  className="text-red-600 text-left hover:text-black"
+                  onClick={() => setPage("/admin/orderdetail")}
+                >
+                  Details
+                </button>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>

@@ -35,16 +35,16 @@ const Orders = () => {
     <section className="min-h-screen mt-6 p-2 sm:p-4 lg:p-0 lg:w-[80%] m-auto">
       <div className="overflow-x-auto">
         <table className="w-full">
-          <thead className="font-[poppins]">
-            <tr className="grid grid-cols-5 gap-24 place-items-center mb-4">
-              <th className="font-normal">Item</th>
-              <th className="font-normal">Status</th>
-              <th className="font-normal">Quantity</th>
-              <th className="font-normal">Price</th>
-              <th className="font-normal">Action</th>
+          <thead className="font-[Inter]">
+            <tr className="mb-4">
+              <th className="font-semibold p-3">Item</th>
+              <th className="font-semibold p-3">Status</th>
+              <th className="font-semibold p-3">Quantity</th>
+              <th className="font-semibold p-3">Price</th>
+              <th className="font-semibold p-3">Action</th>
             </tr>
           </thead>
-          <tbody className="">
+          <tbody className="font-[poppins]">
             {orders.map((item) => (
               <OrderItem item={item} key={item.id} />
             ))}
@@ -59,16 +59,18 @@ export default Orders;
 
 const OrderItem = ({ item }) => {
   return (
-    <tr className="grid grid-cols-5 place-items-center gap-24 even:bg-[#f4f4f4]">
-      <td className="py-4">{item.name}</td>
+    <tr className="even:bg-[#f4f4f4] even:rounded-md">
+      <td className="p-3 text-center">{item.name}</td>
       <td
-        className={`${item.status === "Processing" ? "text-red-600" : "text-green-600"} py-4`}
+        className={`${
+          item.status === "Processing" ? "text-red-600" : "text-green-600"
+        } p-3 text-center`}
       >
         {item.status}
       </td>
-      <td className="py-4">{item.quantity}</td>
-      <td className="py-4">{`$${item.price}`}</td>
-      <td className="py-4">
+      <td className="p-3 text-center">{item.quantity}</td>
+      <td className="p-3 text-center">{`$${item.price}`}</td>
+      <td className="p-3 text-center">
         <button className="text-red-600">Cancel</button>
       </td>
     </tr>
