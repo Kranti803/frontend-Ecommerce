@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FaStar } from "react-icons/fa";
+import { IoIosStar } from "react-icons/io";
 import iconDelivery from "../../assets/iconDelivery.png";
 import iconReturn from "../../assets/iconReturn.png";
 import StarsRating from "react-star-rate";
@@ -7,23 +7,46 @@ import userPng from "../../assets/userPng.png";
 import { BsCart3 } from "react-icons/bs";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDetail } from "../../redux/thunks/productThunk";
+import {
+  addReviewAndRating,
+  deleteReviewAndRating,
+  getProductDetail,
+} from "../../redux/thunks/productThunk";
 import { addToCart } from "../../redux/thunks/cartThunk";
+import { toast } from "react-toastify";
+import { clearError, clearMessage } from "../../redux/slices/productSlice";
 
 const ProductDetails = () => {
-  const [rating, setRating] = useState(3);
+  const [rating, setRating] = useState(0);
+  const [review, setReview] = useState("");
 
   const { id } = useParams();
   const dispatch = useDispatch();
 
-  const { product } = useSelector((state) => state.product);
+  const { product, error, message } = useSelector((state) => state.product);
+
+  const { user } = useSelector((state) => state.auth);
+
+  const addReviewHandler = (e, productId) => {
+    e.preventDefault();
+    dispatch(addReviewAndRating(productId, review, rating));
+    setRating(0);
+    setReview("");
+  };
 
   useEffect(() => {
     dispatch(getProductDetail(id));
-  }, [id, dispatch]);
+    if (error) {
+      toast.error(error);
+      dispatch(clearError());
+    }
+    if (message) {
+      toast.success(message);
+      dispatch(clearMessage());
+    }
+  }, [id, dispatch, error, message]);
 
-  // console.log(product);
-
+  console.log(product);
 
   return (
     <section className="min-h-screen p-4 lg:p-0 lg:w-[80%] m-auto">
@@ -39,12 +62,11 @@ const ProductDetails = () => {
                 <StarsRating
                   value={parseFloat(product?.rating.toFixed(2))}
                   allowHalf={true}
-                  symbol={<FaStar size={20} />}
+                  symbol={<IoIosStar size={20} />}
                   disabled={true}
                 />
               </div>
               <span className="text-sm text-gray-500 font-[poppins]">
-                {/* 19 reviews */}
                 {product?.reviews.length > 1
                   ? `${product?.reviews.length} reviews`
                   : `${product?.reviews.length} review`}
@@ -96,23 +118,28 @@ const ProductDetails = () => {
           <span className="text-xs px-2 md:text-sm text-gray-500">(19)</span>
         </h2>
         <div className="flex flex-col md:flex-row gap-3">
-          <form className="w-full md:w-1/2 flex flex-col">
+          <form
+            className="w-full md:w-1/2 flex flex-col"
+            onSubmit={(e) => addReviewHandler(e, id)}
+          >
             <div className="my-2">
               <StarsRating
                 value={rating}
                 onChange={(value) => setRating(value)}
                 allowHalf={false}
-                symbol={<FaStar size={20} />}
+                symbol={<IoIosStar size={20} />}
                 disabled={false}
               />
             </div>
             <textarea
               name=""
+              value={review}
               id=""
               cols="30"
               rows="10"
               placeholder="Write Reviews"
               className="font-[poppins] bg-gray-100 resize-none border-[1px] border-solid border-gray-400 p-3 rounded-sm outline-none text-sm"
+              onChange={(e) => setReview(e.target.value)}
             />
             <button
               type="sumbit"
@@ -123,35 +150,42 @@ const ProductDetails = () => {
           </form>
 
           <div className="w-full md:w-1/2 pt-8">
-            {/* map the below div */}
-            <div className="flex flex-col font-[poppins] border-b-[1px] mb-1 border-solid border-gray-400">
-              <div className="flex items-center gap-2">
-                <img
-                  src={userPng}
-                  alt=""
-                  className="w-[30px] object-cover h-[30px] rounded-full"
-                />
-                <p className="text-xs sm:text-sm text-gray-600">Kranti Kumar</p>
-              </div>
-              <div className="mt-1">
-                <div>
-                  <StarsRating
-                    symbol={<FaStar size={10} />}
-                    disabled={false}
-                    value={rating}
+            {product?.reviews?.map((item) => (
+              <div className="flex flex-col font-[poppins] border-b-[1px] mb-1 border-solid border-gray-400">
+                <div className="flex items-center gap-2">
+                  <img
+                    src={userPng}
+                    alt=""
+                    className="w-[30px] object-cover h-[30px] rounded-full"
                   />
-                  <p className="text-sm">This is a Product</p>
+                  <p className="text-xs sm:text-sm text-gray-600">
+                    {item?.name}
+                  </p>
                 </div>
-                <div className="flex justify-end gap-4 pt-1">
-                  <button className="border-none outline-none text-[#DB4444] text-xs">
-                    Edit
-                  </button>
-                  <button className="border-none outline-none text-[#DB4444] text-xs">
-                    Delete
-                  </button>
+                <div className="mt-1">
+                  <div>
+                    <StarsRating
+                      symbol={<IoIosStar size={10} />}
+                      disabled={true}
+                      value={item?.userRating}
+                    />
+                    <p className="text-sm">{item?.review}</p>
+                  </div>
+                  <div className="flex justify-end pt-1">
+                    {user?.role === "admin" || item?.userId === user?._id ? (
+                      <button
+                        className="border-none outline-none text-[#DB4444] text-xs"
+                        onClick={() => dispatch(deleteReviewAndRating(id))}
+                      >
+                        Delete review
+                      </button>
+                    ) : (
+                      ""
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
