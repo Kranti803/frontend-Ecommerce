@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
+import axios from "axios";
 
 const ExploreProducts = () => {
+  const [products, setProducts] = useState([]);
+
+  const getProducts = async () => {
+    try {
+      const { data } = await axios.get(
+        "http://localhost:8000/api/v1/get_all_products?search=&category=&startPrice=&endPrice=&rating="
+      );
+      setProducts(data?.products);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
   return (
     <section className="pt-4 px-[6px]">
       <div className="flex items-center justify-between pb-4">
@@ -18,14 +36,17 @@ const ExploreProducts = () => {
         </div>
       </div>
       <div className="grid max-[280px]:grid-cols-1 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 place-items-center gap-8">
-        <ProductCard newProduct={true} />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard newProduct={true} />
-        <ProductCard />
-        <ProductCard newProduct={true} />
-        <ProductCard />
-        <ProductCard newProduct={true} />
+        {products?.map((product) => (
+          <ProductCard
+            id={product?._id}
+            key={product?._id}
+            title={product?.title}
+            image={product?.productImage?.url}
+            price={product?.price}
+            rating={product?.rating}
+            totalReviews={product?.reviews?.length}
+          />
+        ))}
       </div>
       <div className="flex items-center justify-center">
         <button className="bg-[#DB4444] p-3 text-white font-[Inter] rounded-sm my-8">

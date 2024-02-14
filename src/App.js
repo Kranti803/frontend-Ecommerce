@@ -62,7 +62,7 @@ function App() {
         <Route path="/verifyemail/:id/:token" element={<VerifySuccess />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/resetpassword/:resetToken" element={<ResetPassword />} />
-        <Route path="/productdetails" element={<ProductDetails />} />
+        <Route path="/productdetails/:id" element={<ProductDetails />} />
 
         {/* Protected routes */}
         <Route element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect={'/'} />}>

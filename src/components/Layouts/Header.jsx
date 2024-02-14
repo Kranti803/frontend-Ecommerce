@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaRegHeart } from "react-icons/fa";
 import { IoIosSearch, IoMdClose } from "react-icons/io";
@@ -7,21 +7,30 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { navLinks } from "../../constants";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../redux/thunks/authThunk";
+import { toast } from "react-toastify";
+import { clearError, clearMessage } from "../../redux/slices/cartSlice";
 
 const Header = () => {
-
   const [nav, setNav] = useState(false);
 
-  const { isAuthenticated } = useSelector(state => state.auth);
-  
   const dispatch = useDispatch();
+  const { isAuthenticated } = useSelector((state) => state.auth);
+  const { products, error, message } = useSelector((state) => state.cart);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch(clearError());
+    }
+    if (message) {
+      toast.success(message);
+      dispatch(clearMessage());
+    }
+  }, [dispatch, error, message]);
 
   const logoutHandler = () => {
     dispatch(logoutUser());
   };
-
-
-  
 
   return (
     <nav className="flex items-center justify-between h-[70px] px-[6px] md:px-2">
@@ -72,7 +81,7 @@ const Header = () => {
         <Link to={"/cart"} className="relative flex items-center">
           <BsCart3 size={20} />
           <span className="font-semibold bg-[#DB4444] absolute top-[-13%] right-0 h-[16px] w-[16px] rounded-full text-center text-[10px] text-white">
-            0
+            {products.length}
           </span>
         </Link>
       </aside>

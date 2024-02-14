@@ -1,49 +1,81 @@
-import React, { useState } from "react";
-import consoleImg from "../../assets/console.png";
+import React, { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import iconDelivery from "../../assets/iconDelivery.png";
 import iconReturn from "../../assets/iconReturn.png";
 import StarsRating from "react-star-rate";
 import userPng from "../../assets/userPng.png";
+import { BsCart3 } from "react-icons/bs";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductDetail } from "../../redux/thunks/productThunk";
+import { addToCart } from "../../redux/thunks/cartThunk";
 
 const ProductDetails = () => {
   const [rating, setRating] = useState(3);
-  console.log(rating);
+
+  const { id } = useParams();
+  const dispatch = useDispatch();
+
+  const { product } = useSelector((state) => state.product);
+
+  useEffect(() => {
+    dispatch(getProductDetail(id));
+  }, [id, dispatch]);
+
+  // console.log(product);
+
 
   return (
     <section className="min-h-screen p-4 lg:p-0 lg:w-[80%] m-auto">
       <div className="flex flex-col md:flex-row gap-4">
         <aside className="md:w-1/2 bg-[#f3f2f2] p-10 md:p-20">
-          <img src={consoleImg} className="" alt="" />
+          <img src={product?.productImage?.url} className="" alt="" />
         </aside>
         <aside className="md:w-1/2">
           <div>
-            <h2 className="font-bold font-[poppins]">Havic HV G-92 Gamepad</h2>
+            <h2 className="font-bold font-[poppins]">{product?.title}</h2>
             <div className="flex gap-2 items-center">
               <div className="flex items-center gap-[1px] text-yellow-400 py-2">
-                <FaStar size={10} />
-                <FaStar size={10} />
-                <FaStar size={10} />
-                <FaStar size={10} />
-                <FaStar size={10} />
+                <StarsRating
+                  value={parseFloat(product?.rating.toFixed(2))}
+                  allowHalf={true}
+                  symbol={<FaStar size={20} />}
+                  disabled={true}
+                />
               </div>
               <span className="text-sm text-gray-500 font-[poppins]">
-                19 reviews
+                {/* 19 reviews */}
+                {product?.reviews.length > 1
+                  ? `${product?.reviews.length} reviews`
+                  : `${product?.reviews.length} review`}
               </span>
-              <span className="text-green-600 text-xs md:text-sm">
-                In Stock
-              </span>
+              {product?.stock === 0 ? (
+                <span className="text-red-600 text-xs font-[poppins] md:text-sm">
+                  Out Of Stock
+                </span>
+              ) : (
+                <span className="text-green-600 text-xs font-[poppins] md:text-sm">
+                  In Stock
+                </span>
+              )}
             </div>
-            <p className="font-[poppins] font-semibold text-sm pb-2">$192.00</p>
-            <p className="font-[poppins] text-xs md:text-sm pb-2">
-              PlayStation 5 Controller Skin High quality vinyl with air channel
-              adhesive for easy bubble free install & mess free removal Pressure
-              sensitive.
+            <p className="font-[poppins] font-semibold text-sm pb-2">
+              ${product?.price}
+            </p>
+            <p className="font-[poppins] text-xs md:text-sm pb-2 mt-8">
+              {product?.description}
             </p>
           </div>
-          <div className="flex justify-center items-center my-2">
-            <button className="text-sm w-full md:w-1/2 bg-[#DB4444] text-white font-[inter] px-4 py-1 rounded-sm">
+          <div className="flex justify-center flex-col gap-y-4 items-center my-2 mt-6">
+            <button className="text-sm w-full md:w-1/2 bg-[#DB4444] text-white font-[inter] px-4 py-2 rounded-sm">
               Buy Now
+            </button>
+            <button
+              className="text-sm w-full md:w-1/2 bg-[#1e1e1e] text-white font-[inter] px-4 py-2 rounded-sm flex justify-center items-center gap-x-2"
+              onClick={() => dispatch(addToCart(id))}
+            >
+              Add To Cart
+              <BsCart3 size={18} />
             </button>
           </div>
           <div className="border-[1px] flex justify-center items-center flex-col w-full md:w-1/2 m-auto border-solid border-gray-400 mt-3">
@@ -58,7 +90,7 @@ const ProductDetails = () => {
           </div>
         </aside>
       </div>
-      <div className="mt-4">
+      <div className="mt-4 mb-3">
         <h2 className="font-[Inter] border-b-[1px] bolder-solid border-gray-400">
           Reviews
           <span className="text-xs px-2 md:text-sm text-gray-500">(19)</span>
@@ -111,12 +143,15 @@ const ProductDetails = () => {
                   <p className="text-sm">This is a Product</p>
                 </div>
                 <div className="flex justify-end gap-4 pt-1">
-                  <button className="border-none outline-none text-[#DB4444] text-xs">Edit</button>
-                  <button className="border-none outline-none text-[#DB4444] text-xs">Delete</button>
+                  <button className="border-none outline-none text-[#DB4444] text-xs">
+                    Edit
+                  </button>
+                  <button className="border-none outline-none text-[#DB4444] text-xs">
+                    Delete
+                  </button>
                 </div>
               </div>
             </div>
-           
           </div>
         </div>
       </div>

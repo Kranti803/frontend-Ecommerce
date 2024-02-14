@@ -1,7 +1,8 @@
-import React from "react";
+import {React,useEffect,useState} from "react";
 import ProductCard from "./ProductCard";
 import { FaArrowRight } from "react-icons/fa6";
 import { FaArrowLeft } from "react-icons/fa6";
+import axios from 'axios';
 
 const SalesProducts = () => {
   const slideLeft = () => {
@@ -12,6 +13,23 @@ const SalesProducts = () => {
     const slider = document.getElementById("slider_container");
     slider.scrollLeft = slider.scrollLeft + 650;
   };
+
+  const [products, setProducts] = useState([]);
+
+  const getProducts = async () => {
+    try {
+      const { data } = await axios.get(
+        "http://localhost:8000/api/v1/get_all_products?search=&category=&startPrice=&endPrice=&rating="
+      );
+      setProducts(data?.products);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
   return (
     <section className="pt-4 px-[6px]">
       <div className="flex items-center justify-between pb-4">
@@ -41,15 +59,18 @@ const SalesProducts = () => {
         id="slider_container"
         className=" flex gap-8 overflow-x-scroll scroll-smooth no-scrollbar"
       >
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+        {products?.map((product) => (
+          <ProductCard
+            id={product?._id}
+            key={product?._id}
+            inde
+            title={product?.title}
+            image={product?.productImage?.url}
+            price={product?.price}
+            rating={product?.rating}
+            totalReviews={product?.reviews?.length}
+          />
+        ))}
       </div>
     </section>
   );

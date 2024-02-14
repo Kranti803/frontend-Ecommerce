@@ -1,36 +1,52 @@
 import React from "react";
-import monitor from "../../assets/monitor.png";
 import { FaRegHeart } from "react-icons/fa";
 import { IoIosStar } from "react-icons/io";
 import { Link } from "react-router-dom";
+import StarsRating from "react-star-rate";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/thunks/cartThunk";
 
-const ProductCard = ({ newProduct }) => {
+const ProductCard = ({ title, image, price, rating, id }) => {
+  const dispatch = useDispatch();
+
+
   return (
-    <div className="max-w-[250px] max-h-[400px] font-[poppins] relative flex-shrink-0">
-      <div className="max-h-[250px] w-full bg-[#F5F5F5]">
-        <img src={monitor} alt="" className="w-full h-full p-8 bg-inherit" />
-        <button className="bg-[#DB4444] text-white w-full text-sm py-2">Add To Cart</button>
+    <div className="max-w-[250px] h-[400px] font-[poppins] relative flex-shrink-0">
+      <div className="h-[250px] w-full bg-[#F5F5F5]">
+        <img
+          src={image}
+          alt=""
+          className="w-full h-full object-cover p-8 bg-inherit"
+        />
+        <button
+          className="bg-[#DB4444] text-white w-full text-sm py-2"
+          onClick={() => dispatch(addToCart(id))}
+        >
+          Add To Cart
+        </button>
       </div>
       <div className="absolute top-2 w-full flex justify-end px-2">
         <button className="borrder-none outline-none bg-[#ffffff] h-[25px] w-[25px] flex items-center justify-center p-[2px] rounded-full">
           <FaRegHeart />
         </button>
       </div>
-      <Link className="flex flex-col gap-[8px]">
-        <h4 className="text-sm md:text-base">HAVIT HV-G92 Gamepad</h4>
-        <p className="text-sm md:text-base flex gap-4">
-          <span>$120</span>
-          <span className="line-through text-gray-500">$160</span>
+      <Link
+        to={`/productdetails/${id}`}
+        className="flex flex-col gap-y-[8px] mt-12"
+      >
+        <h4 className="text-sm md:text-base">{title}</h4>
+        <p className="text-sm md:text-base">
+          <span>${price}</span>
         </p>
         <div className="flex gap-2">
-          <div className="flex gap-[1px] text-[#FFAD33]">
-            <IoIosStar />
-            <IoIosStar />
-            <IoIosStar />
-            <IoIosStar />
-            <IoIosStar />
+          <div className="text-[#FFAD33]">
+            <StarsRating
+              value={rating}
+              allowHalf={true}
+              symbol={<IoIosStar size={20} />}
+              disabled={true}
+            />
           </div>
-          <span className="text-xs md:text-sm text-gray-500">(16)</span>
         </div>
       </Link>
     </div>
