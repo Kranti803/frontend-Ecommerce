@@ -3,6 +3,7 @@ import authReducer from '../redux/slices/authSlice';
 import userReducer from '../redux/slices/userSlice';
 import cartReducer from '../redux/slices/cartSlice';
 import productReducer from '../redux/slices/productSlice';
+import dashboardReducer from '../redux/slices/dashboardSlice';
 
 
 
@@ -12,6 +13,7 @@ export const store = configureStore({
     user: userReducer,
     cart: cartReducer,
     product: productReducer,
+    dashboard: dashboardReducer
 
 
   },

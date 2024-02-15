@@ -46,7 +46,6 @@ const ProductDetails = () => {
     }
   }, [id, dispatch, error, message]);
 
-  console.log(product);
 
   return (
     <section className="min-h-screen p-4 lg:p-0 lg:w-[80%] m-auto">
