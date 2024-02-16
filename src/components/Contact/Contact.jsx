@@ -41,7 +41,7 @@ const Contact = () => {
   return (
     <section className="p-4 lg:p-0 lg:w-[80%] m-auto mt-12 flex flex-wrap-reverse min-h-[calc(100vh-100px)]">
       <div className="flex flex-col gap-2 w-full md:w-1/2">
-        <div className="border-b-2 border-gray-400 pb-2">
+        <div className="pb-14">
           <aside className="flex items-center gap-3  ">
             <img src={phoneIcon} alt="" />
             <h4 className="text-lg sm:text-xl md:text-2xl">Call To Us</h4>

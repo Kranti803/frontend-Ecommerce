@@ -8,7 +8,7 @@ const ExploreProducts = () => {
   const getProducts = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:8000/api/v1/get_all_products?search=&category=&startPrice=&endPrice=&rating="
+        "http://localhost:8000/api/v1/get_all_products?search=&category=&startPrice=&endPrice="
       );
       setProducts(data?.products);
     } catch (error) {

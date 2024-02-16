@@ -59,7 +59,7 @@ const ProductDetails = () => {
             <div className="flex gap-2 items-center">
               <div className="flex items-center gap-[1px] text-yellow-400 py-2">
                 <StarsRating
-                  value={parseFloat(product?.rating.toFixed(2))}
+                  value={parseFloat(product?.rating?.toFixed(2))}
                   allowHalf={true}
                   symbol={<IoIosStar size={20} />}
                   disabled={true}

@@ -18,14 +18,14 @@ const Cart = () => {
 
   return (
     <section className="min-h-screen mt-4 p-[2px] sm:p-4 lg:p-0 lg:w-[80%] m-auto">
-      <div className="font-normal">
-        <table className="font-[poppins] w-full text-xs sm:text-md md:text-lg flex flex-col gap-4">
+      <div className="overflow-x-auto">
+        <table className="font-[Inter] w-full">
           <thead>
-            <tr className="grid grid-cols-4 place-items-start text-[12px] sm:text-md md:text-lg border-b-2 border-gray-300 py-3 px-1 md:px-2">
-              <th className="font-normal">Product</th>
-              <th className="font-normal">Price</th>
-              <th className="font-normal">Quantity</th>
-              <th className="font-normal">Remove</th>
+            <tr>
+              <th className="font-semibold text-lg p-3">Product</th>
+              <th className="font-semibold text-lg p-3">Price</th>
+              <th className="font-semibold text-lg p-3">Quantity</th>
+              <th className="font-semibold text-lg p-3">Remove</th>
             </tr>
           </thead>
           <tbody>
@@ -43,9 +43,9 @@ const Cart = () => {
           </tbody>
         </table>
         {products.length > 0 && (
-          <div>
+          <div className="flex justify-end">
             <button
-              className="px-2 py-1 mt-2 font-[poppins] bg-[#DB4444] text-white rounded-sm"
+              className="px-2 py-1 mt-6 font-[poppins] bg-[#DB4444] text-white rounded-sm"
               onClick={() => dispatch(clearCart())}
             >
               Clear Cart
@@ -90,13 +90,13 @@ const CartItem = ({ title, price, image, id, quantity, index }) => {
 
 
   return (
-    <tr className="border-b-[1px] pb-1 grid grid-cols-4 border-gray-300">
-      <td className="flex flex-col sm:flex-row gap-x-2">
+    <tr className="even:bg-[#f4f4f4] rounded-md">
+      <td className="flex flex-col sm:flex-row gap-x-2 p-3 justify-center items-center">
         <img src={image} alt="" className="h-[54px] w-[54px] object-contain" />
         <span className="text-sm">{title}</span>
       </td>
-      <td>${price}</td>
-      <td className="flex gap-2">
+      <td className="p-3 text-center">${price}</td>
+      <td className="flex justify-center items-center gap-2 p-3 text-center">
         <button
           className="h-fit"
           onClick={() => dispatch(decrementQuantity(index))}
@@ -111,7 +111,7 @@ const CartItem = ({ title, price, image, id, quantity, index }) => {
           <MdChevronRight size={25} />
         </button>
       </td>
-      <td>
+      <td className="p-3 text-center">
         <button
           className="text-red-600"
           onClick={() => dispatch(removeFromCart(id))}

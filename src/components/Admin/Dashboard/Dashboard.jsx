@@ -13,6 +13,7 @@ import UpdateProduct from "./UpdateProduct";
 const Dashboard = () => {
   const [sidebar, setSidebar] = useState(false);
   const [page, setPage] = useState("/admin/dashboard");
+  const [productId, setProductId] = useState("");
 
   const renderPage = () => {
     switch (page) {
@@ -23,13 +24,13 @@ const Dashboard = () => {
       case "/admin/users":
         return <GetAllUsers />;
       case "/admin/products":
-        return <GetAllProducts setPage={setPage} />;
+        return <GetAllProducts setPage={setPage} setProductId={setProductId} />;
       case "/admin/orders":
         return <GetAllOrders setPage={setPage} />;
       case "/admin/orderdetail":
         return <OrderDetail />;
       case "/admin/updateproduct":
-        return <UpdateProduct />;
+        return <UpdateProduct productId={productId} />;
       default:
         return <GetDetails />;
     }

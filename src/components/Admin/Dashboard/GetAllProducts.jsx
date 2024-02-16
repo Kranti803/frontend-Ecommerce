@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../../redux/thunks/dashboardThunk";
 import { clearMessage } from "../../../redux/slices/dashboardSlice";
 import { toast } from "react-toastify";
-const GetAllProducts = ({ setPage }) => {
+
+const GetAllProducts = ({ setPage, setProductId }) => {
   const dispatch = useDispatch();
   const { products, error } = useSelector((state) => state.dashboard);
 
@@ -31,7 +32,12 @@ const GetAllProducts = ({ setPage }) => {
           </thead>
           <tbody className="font-[poppins]">
             {products?.map((item) => (
-              <Product key={item?._id} item={item} setPage={setPage} />
+              <Product
+                key={item?._id}
+                item={item}
+                setPage={setPage}
+                setProductId={setProductId}
+              />
             ))}
           </tbody>
         </table>
@@ -42,7 +48,12 @@ const GetAllProducts = ({ setPage }) => {
 
 export default GetAllProducts;
 
-const Product = ({ item, setPage }) => {
+const Product = ({ item, setPage, setProductId }) => {
+
+  const updateHandler = (id) => {
+    setPage("/admin/updateproduct");
+    setProductId(id);
+  };
   return (
     <>
       <tr className="even:bg-[#f4f4f4] even:rounded-md p-3">
@@ -57,7 +68,7 @@ const Product = ({ item, setPage }) => {
         <td className="p-3 text-center">${item?.price}</td>
         <td className="p-3 text-center flex flex-col justify-center items-center gap-y-3">
           <button
-            onClick={() => setPage("/admin/updateproduct")}
+            onClick={()=>updateHandler(item?._id)}
             className="text-red-600 text-left hover:text-black"
           >
             Update Product

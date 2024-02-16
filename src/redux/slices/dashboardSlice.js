@@ -39,6 +39,51 @@ export const dashboardSlice = createSlice({
             state.loading = false;
             state.error = action.payload;
         },
+        addProductRequest: (state) => {
+            state.loading = true;
+        },
+        addProductSuccess: (state, action) => {
+            state.loading = false;
+            state.message = action.payload;
+        },
+        addProductReject: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
+        updateProductRequest: (state) => {
+            state.loading = true;
+        },
+        updateProductSuccess: (state, action) => {
+            state.loading = false;
+            state.message = action.payload;
+        },
+        updateProductReject: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
+        changeUserRoleRequest: (state) => {
+            state.loading = true;
+        },
+        changeUserRoleSuccess: (state, action) => {
+            state.loading = false;
+            state.message = action.payload;
+        },
+        changeUserRoleReject: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
+        deleteUserRequest: (state) => {
+            state.loading = true;
+        },
+        deleteUserSuccess: (state, action) => {
+            state.loading = false;
+            state.message = action.payload;
+        },
+
+        deleteUserReject: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
         clearMessage: (state) => {
             state.message = null;
         },
@@ -48,6 +93,10 @@ export const dashboardSlice = createSlice({
     }
 })
 export const { getDashboardStatRequest, getDashboardStatSuccess, getDashboardStatReject,
-    getAllUsersReject, getAllUsersRequest, getAllUsersSuccess,
-    getAllProductsReject, getAllProductsRequest, getAllProductsSuccess, clearError, clearMessage } = dashboardSlice.actions;
+    getAllUsersReject, getAllUsersRequest, getAllUsersSuccess, getAllProductsReject,
+    addProductReject, addProductRequest, addProductSuccess, getAllProductsRequest,
+    updateProductReject, updateProductRequest, updateProductSuccess, getAllProductsSuccess,
+    clearError, clearMessage, changeUserRoleReject, changeUserRoleRequest, changeUserRoleSuccess,
+    deleteUserReject, deleteUserRequest, deleteUserSuccess } = dashboardSlice.actions;
+
 export default dashboardSlice.reducer;
