@@ -46,7 +46,6 @@ const ProductDetails = () => {
     }
   }, [id, dispatch, error, message]);
 
-
   return (
     <section className="min-h-screen p-4 lg:p-0 lg:w-[80%] m-auto">
       <div className="flex flex-col md:flex-row gap-4">
@@ -150,7 +149,10 @@ const ProductDetails = () => {
 
           <div className="w-full md:w-1/2 pt-8">
             {product?.reviews?.map((item) => (
-              <div className="flex flex-col font-[poppins] border-b-[1px] mb-1 border-solid border-gray-400">
+              <div
+                key={item._id}
+                className="flex flex-col font-[poppins] border-b-[1px] mb-1 border-solid border-gray-400"
+              >
                 <div className="flex items-center gap-2">
                   <img
                     src={userPng}

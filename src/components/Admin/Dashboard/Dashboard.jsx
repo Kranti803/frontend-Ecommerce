@@ -41,7 +41,7 @@ const Dashboard = () => {
   return (
     <section className="min-h-screen bg-[#f0f0f0]">
       <div className=" flex h-12 justify-end gap-4 items-center bg-[#fefefe] px-2 ">
-        <h2 className="text-sm text-[#e05607]">Hello, {user?.name}</h2>
+        <h2 className="text-sm text-[#e05607] font-[poppins]">Hello, {user?.name}</h2>
         <button
           onClick={() => setSidebar(!sidebar)}
           className="md:hidden text-[#e05607]"

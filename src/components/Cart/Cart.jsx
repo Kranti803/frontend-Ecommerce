@@ -42,19 +42,19 @@ const Cart = () => {
             ))}
           </tbody>
         </table>
-        {products.length > 0 && (
-          <div className="flex justify-end">
-            <button
-              className="px-2 py-1 mt-6 font-[poppins] bg-[#DB4444] text-white rounded-sm"
-              onClick={() => dispatch(clearCart())}
-            >
-              Clear Cart
-            </button>
-          </div>
-        )}
       </div>
+      {products.length > 0 && (
+        <div className="flex justify-end">
+          <button
+            className="px-2 py-1 mt-6 font-[poppins] bg-[#DB4444] text-white rounded-sm"
+            onClick={() => dispatch(clearCart())}
+          >
+            Clear Cart
+          </button>
+        </div>
+      )}
       {products?.length > 0 && (
-        <div className="flex justify-end mt-4 font-[poppins]">
+        <div className="flex justify-end my-4 font-[poppins]">
           <div className="border-[1px] border-gray-300 w-full xs:w-1/2 p-4 rounded-sm">
             <h2 className="text-md font-semibold">Cart Total</h2>
             <p className="text-sm flex justify-between pt-2">
@@ -85,9 +85,7 @@ const Cart = () => {
 export default Cart;
 
 const CartItem = ({ title, price, image, id, quantity, index }) => {
-
   const dispatch = useDispatch();
-
 
   return (
     <tr className="even:bg-[#f4f4f4] rounded-md">
@@ -96,20 +94,17 @@ const CartItem = ({ title, price, image, id, quantity, index }) => {
         <span className="text-sm">{title}</span>
       </td>
       <td className="p-3 text-center">${price}</td>
-      <td className="flex justify-center items-center gap-2 p-3 text-center">
-        <button
-          className="h-fit"
-          onClick={() => dispatch(decrementQuantity(index))}
-        >
-          <MdChevronLeft size={25} />
-        </button>
-        <p className="mt-1 md:mt-0">{quantity}</p>
-        <button
-          className="h-fit"
-          onClick={() => dispatch(incrementQuantity(index))}
-        >
-          <MdChevronRight size={25} />
-        </button>
+
+      <td className="p-3 text-center">
+        <div className="flex justify-evenly items-center">
+          <button onClick={() => dispatch(decrementQuantity(index))}>
+            <MdChevronLeft size={25} />
+          </button>
+          <p>{quantity}</p>
+          <button onClick={() => dispatch(incrementQuantity(index))}>
+            <MdChevronRight size={25} />
+          </button>
+        </div>
       </td>
       <td className="p-3 text-center">
         <button

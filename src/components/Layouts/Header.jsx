@@ -88,7 +88,7 @@ const Header = () => {
 
       {/**************************mobile nav ******************************/}
       <aside
-        className={`text-white absolute z-10 h-full w-[60%] top-0 left-0 bg-black p-4 duration-200 ease-in ${
+        className={`text-white absolute z-10 h-full w-[60%] top-0 left-0 bg-[#708b20] p-4 duration-200 ease-in ${
           nav ? "translate-x-[0%]" : "translate-x-[-150%]"
         }`}
       >

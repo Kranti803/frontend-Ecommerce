@@ -24,7 +24,8 @@ import { clearError, clearMessage } from "./redux/slices/authSlice";
 import ForgotPassword from "./components/Autentication/ForgotPassword";
 import ResetPassword from "./components/Autentication/ResetPassword";
 import ProtectedRoute from './utils/protectedRoute';
-
+import PaymentSuccess from "./components/Payment/PaymentSuccess";
+import Cancel from "./components/Payment/Cancel";
 
 
 function App() {
@@ -63,6 +64,9 @@ function App() {
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/resetpassword/:resetToken" element={<ResetPassword />} />
         <Route path="/productdetails/:id" element={<ProductDetails />} />
+        <Route path="/paymentsuccess" element={<PaymentSuccess />} />
+
+
 
         {/* Protected routes */}
         <Route element={<ProtectedRoute isAuthenticated={!isAuthenticated} redirect={'/'} />}>
