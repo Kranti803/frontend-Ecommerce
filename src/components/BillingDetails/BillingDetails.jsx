@@ -1,10 +1,16 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 import { serverUrl } from "../../redux/store";
+import { placeOrder } from "../../redux/thunks/orderThunk";
+import {
+  clearError,
+  clearMessage,
+  storeTempData,
+} from "../../redux/slices/orderSlice";
+import { useNavigate } from "react-router-dom";
 
 const BillingDetails = () => {
   const [paymentMethod, setPaymentMethod] = useState("");
@@ -12,45 +18,109 @@ const BillingDetails = () => {
   const { products, subTotal, shipping, totalPrice } = useSelector(
     (state) => state.cart
   );
+  const { error, message } = useSelector((state) => state.order);
 
+  const [formdata, setFormdata] = useState({
+    name: "",
+    email: "",
+    address: "",
+    city: "",
+    phone: "",
+    orderItems: products,
+    paymentInfo: {
+      id: "cod",
+      status: "paid",
+    },
+    subTotal: subTotal,
+    shippingPrice: shipping,
+    totalPrice: totalPrice,
+  });
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const makeStripePayment = async () => {
-    try {
-      const stripe = await loadStripe(
-        "pk_test_51OkhlcSJmrxbqh51oYUmDiCXonW5ACEmu9RkkNV2HDCXRq53V8iHydpgK8SAee8do1lZ7YoObkjm04uBvG9Vh43Z00sNDQ7UYa"
-      );
-
-      const { data } = await axios.post(
-        `${serverUrl}/create-checkout-session`,
-        { products, shipping },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        }
-      );
-
-      stripe.redirectToCheckout({
-        sessionId: data?.id,
-      });
-    } catch (error) {
-      toast.error(error?.response?.data?.message);
-    }
-  };
 
   const proceedToPayment = () => {
     if (paymentMethod === "") {
       toast.error("Select one payment method !");
     } else if (paymentMethod === "cod") {
-      navigate("/paymentsuccess");
+      dispatch(placeOrder(formdata));
     } else if (paymentMethod === "stripe") {
-      // console.log("its stripe");
       makeStripePayment();
     }
   };
 
+  const makeStripePayment = async () => {
+    try {
+      if (
+        !formdata.name ||
+        !formdata.email ||
+        !formdata.city ||
+        !formdata.phone ||
+        !formdata.address
+      ) {
+        toast.error("All fields are required");
+      } else {
+        const stripe = await loadStripe(
+          "pk_test_51OkhlcSJmrxbqh51oYUmDiCXonW5ACEmu9RkkNV2HDCXRq53V8iHydpgK8SAee8do1lZ7YoObkjm04uBvG9Vh43Z00sNDQ7UYa"
+        );
+
+        const { data } = await axios.post(
+          `${serverUrl}/create-checkout-session`,
+          { products, shipping },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            withCredentials: true,
+          }
+        );
+        setFormdata((prevFormData) => ({
+          ...prevFormData,
+          paymentInfo: {
+            ...prevFormData.paymentInfo,
+            id: data?.id,
+          },
+        }));
+        stripe.redirectToCheckout({
+          sessionId: data?.id,
+        });
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
+
+  useEffect(() => {
+    // This effect will run every time the formdata state changes
+    dispatch(storeTempData(formdata));
+  }, [formdata, dispatch]);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch(clearError());
+    }
+    if (message) {
+      toast.success(message);
+      setFormdata({
+        name: "",
+        email: "",
+        address: "",
+        city: "",
+        phone: "",
+        orderItems: null,
+        paymentInfo: {
+          id: "",
+          status: "",
+        },
+        subTotal: null,
+        shippingPrice: null,
+        totalPrice: null,
+      });
+      dispatch(clearMessage());
+      navigate("/");
+    }
+  }, [dispatch, error, message, navigate]);
   return (
     <section className="min-h-[calc(100vh-70px)] p-4 lg:p-0 lg:w-[80%] m-auto">
       <h2 className="text-xl md:text-2xl font-[inter] font-semibold">
@@ -65,43 +135,68 @@ const BillingDetails = () => {
             className="border-none outline-none bg-[#F5F5F5] px-3 py-1 rounded-sm mb-2"
             id="name"
             name="name"
+            value={formdata.name}
+            onChange={(e) =>
+              setFormdata({ ...formdata, [e.target.name]: e.target.value })
+            }
             type="text"
+            required
           />
-          <label htmlFor="name" className="text-xs font-[poppins] pb-[2px]">
+          <label htmlFor="email" className="text-xs font-[poppins] pb-[2px]">
             Email
           </label>
           <input
             className="border-none outline-none bg-[#F5F5F5] px-3 py-1 rounded-sm mb-2"
-            id="name"
-            name="name"
-            type="text"
+            id="email"
+            name="email"
+            value={formdata.email}
+            onChange={(e) =>
+              setFormdata({ ...formdata, [e.target.name]: e.target.value })
+            }
+            type="email"
+            required
           />
-          <label htmlFor="name" className="text-xs font-[poppins] pb-[2px]">
+          <label htmlFor="address" className="text-xs font-[poppins] pb-[2px]">
             Address
           </label>
           <input
             className="border-none outline-none bg-[#F5F5F5] px-3 py-1 rounded-sm mb-2"
-            id="name"
-            name="name"
+            id="address"
+            name="address"
+            value={formdata.address}
+            onChange={(e) =>
+              setFormdata({ ...formdata, [e.target.name]: e.target.value })
+            }
             type="text"
+            required
           />
-          <label htmlFor="name" className="text-xs font-[poppins] pb-[2px]">
+          <label htmlFor="city" className="text-xs font-[poppins] pb-[2px]">
             City/Town
           </label>
           <input
             className="border-none outline-none bg-[#F5F5F5] px-3 py-1 rounded-sm mb-2"
-            id="name"
-            name="name"
+            id="city"
+            name="city"
+            value={formdata.city}
+            onChange={(e) =>
+              setFormdata({ ...formdata, [e.target.name]: e.target.value })
+            }
             type="text"
+            required
           />
-          <label htmlFor="name" className="text-xs font-[poppins] pb-[2px]">
+          <label htmlFor="phone" className="text-xs font-[poppins] pb-[2px]">
             Phone
           </label>
           <input
             className="border-none outline-none bg-[#F5F5F5] px-3 py-1 rounded-sm mb-2"
-            id="name"
-            name="name"
+            id="phone"
+            name="phone"
+            value={formdata.phone}
+            onChange={(e) =>
+              setFormdata({ ...formdata, [e.target.name]: e.target.value })
+            }
             type="text"
+            required
           />
         </form>
         <div className="w-full flex flex-col gap-3 md:w-1/2">

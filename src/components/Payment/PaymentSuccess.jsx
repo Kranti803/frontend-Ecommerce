@@ -1,10 +1,44 @@
-import React from "react";
+import React, { useEffect,useRef,useCallback } from "react";
 import successPng from "../../assets/successPng.png";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { placeOrder } from "../../redux/thunks/orderThunk";
+import { clearError, clearMessage } from "../../redux/slices/orderSlice";
 
 const PaymentSuccess = () => {
 
-//   const navigate = useNavigate();
+  const { tempData, error, message } = useSelector((state) => state.order);
+  const dispatch = useDispatch();
+
+  // Ref to track whether placeOrder has been dispatched
+  const placeOrderDispatched = useRef(false);
+
+  // Memoized placeOrder function using useCallback
+  const memoizedPlaceOrder = useCallback(
+    (data) => {
+      if (!placeOrderDispatched.current) {
+        dispatch(placeOrder(data));
+        placeOrderDispatched.current = true;
+      }
+    },
+    [dispatch]
+  );
+
+  useEffect(() => {
+    if (tempData) {
+      memoizedPlaceOrder(tempData);
+    }
+  }, [memoizedPlaceOrder, tempData]);
+
+  useEffect(() => {
+    if (error) {
+      dispatch(clearError());
+    }
+
+    if (message) {
+      dispatch(clearMessage());
+    }
+  }, [dispatch, error, message]);
 
   return (
     <section className="min-h-screen flex justify-center items-center">

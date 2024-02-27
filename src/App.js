@@ -65,6 +65,7 @@ function App() {
         <Route path="/resetpassword/:resetToken" element={<ResetPassword />} />
         <Route path="/productdetails/:id" element={<ProductDetails />} />
         <Route path="/paymentsuccess" element={<PaymentSuccess />} />
+        <Route path="/cancelpayment" element={<Cancel />} />
 
 
 
