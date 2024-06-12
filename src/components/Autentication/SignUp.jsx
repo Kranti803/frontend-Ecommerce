@@ -1,10 +1,9 @@
-import { React, useEffect, useState } from "react";
+import { React,useState } from "react";
 import ShoppingCartImg from "../../assets/shoppingCart.png";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../redux/thunks/authThunk";
-import { toast } from "react-toastify";
-import { clearError, clearMessage } from "../../redux/slices/authSlice";
+import LoadingButton from "../Layouts/LoadingButton";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -21,22 +20,12 @@ const SignUp = () => {
   };
 
   const dispatch = useDispatch();
-  const { error, message } = useSelector((state) => state.auth);
+  const { loading } = useSelector((state) => state.auth);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(registerUser(formData));
   };
-  useEffect(() => {
-    if (error) {
-      toast.error(error);
-      dispatch(clearError());
-    }
-    if (message) {
-      toast.success(message);
-      dispatch(clearMessage());
-    }
-  }, [error, message, dispatch]);
 
   return (
     <div className="flex min-h-[calc(100vh-75px)] flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -115,14 +104,21 @@ const SignUp = () => {
           </div>
 
           <div>
-            <button
-              type="submit"
-              className="flex w-full justify-center rounded-sm bg-[#DB4444] px-3 py-1.5 text-sm font-semibold leading-6 text-white border-none outline-none text-[poppins]"
-            >
-              Create Account
-            </button>
+            {loading ? (
+              <LoadingButton
+                className={
+                  "flex w-full justify-center rounded-sm bg-[#BB4444] px-3 py-2 text-sm font-semibold leading-6 text-white border-none outline-none text-[poppins]"
+                }
+              />
+            ) : (
+              <button
+                type="submit"
+                className="flex w-full justify-center rounded-sm bg-[#DB4444] px-3 py-2 text-sm font-semibold leading-6 text-white border-none outline-none text-[poppins]"
+              >
+                Create Account
+              </button>
+            )}
           </div>
-         
         </form>
 
         <p className="mt-10 text-center text-sm text-gray-500">

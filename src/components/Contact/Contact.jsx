@@ -5,16 +5,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearError, clearMessage } from "../../redux/slices/userSlice";
 import { toast } from "react-toastify";
 import { contactUs } from "../../redux/thunks/userThunk";
+import LoadingButton from "../Layouts/LoadingButton";
 
 const Contact = () => {
   const { user } = useSelector((state) => state.auth);
   const [formData, setFormData] = useState({
-    name:user?.name,
-    email:user?.email,
+    name: user?.name,
+    email: user?.email,
     phone: "",
     message: "",
   });
-  const { error, message } = useSelector((state) => state.user);
+  const { error, message, loading } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -104,12 +105,20 @@ const Contact = () => {
               placeholder="Your Message "
             />
           </div>
-          <button
-            type="submit"
-            className="flex w-full justify-center rounded-sm bg-[#DB4444] mb-4 px-3 py-1.5 text-sm font-semibold leading-6 text-white border-none outline-none text-[poppins]"
-          >
-            Submit
-          </button>
+          {loading ? (
+            <LoadingButton
+              className={
+                "flex w-full justify-center rounded-sm bg-[#DB4444] px-3 py-1.5 text-sm font-semibold leading-6 text-white border-none outline-none text-[poppins]"
+              }
+            />
+          ) : (
+            <button
+              type="submit"
+              className="flex w-full justify-center rounded-sm bg-[#DB4444] mb-4 px-3 py-1.5 text-sm font-semibold leading-6 text-white border-none outline-none text-[poppins]"
+            >
+              Submit
+            </button>
+          )}
         </form>
       </div>
     </section>

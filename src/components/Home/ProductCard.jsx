@@ -1,5 +1,4 @@
 import React from "react";
-import { FaRegHeart } from "react-icons/fa";
 import { IoIosStar } from "react-icons/io";
 import { Link } from "react-router-dom";
 import StarsRating from "react-star-rate";
@@ -23,11 +22,6 @@ const ProductCard = ({ title, image, price, rating, id }) => {
           onClick={() => dispatch(addToCart(id))}
         >
           Add To Cart
-        </button>
-      </div>
-      <div className="absolute top-2 w-full flex justify-end px-2">
-        <button className="borrder-none outline-none bg-[#ffffff] h-[25px] w-[25px] flex items-center justify-center p-[2px] rounded-full">
-          <FaRegHeart />
         </button>
       </div>
       <Link

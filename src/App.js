@@ -13,7 +13,6 @@ import Cart from "./components/Cart/Cart";
 import Orders from './components/Orders/Orders';
 import BillingDetails from "./components/BillingDetails/BillingDetails";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
-import Wishlist from "./components/Wishlist/Wishlist";
 import Dashboard from "./components/Admin/Dashboard/Dashboard";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -26,6 +25,7 @@ import ResetPassword from "./components/Autentication/ResetPassword";
 import ProtectedRoute from './utils/protectedRoute';
 import PaymentSuccess from "./components/Payment/PaymentSuccess";
 import Cancel from "./components/Payment/Cancel";
+import AllProducts from "./components/All Products/AllProducts";
 
 
 function App() {
@@ -52,7 +52,7 @@ function App() {
   return (
     <Router>
       <Header />
-      <ToastContainer />
+      <ToastContainer position="bottom-right" />
       <Routes>
 
         {/* public routes  */}
@@ -66,6 +66,7 @@ function App() {
         <Route path="/productdetails/:id" element={<ProductDetails />} />
         <Route path="/paymentsuccess" element={<PaymentSuccess />} />
         <Route path="/cancelpayment" element={<Cancel />} />
+        <Route path="/allproducts" element={<AllProducts />} />
 
 
 
@@ -80,7 +81,6 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/billingdetails" element={<BillingDetails />} />
-          <Route path="/wishlist" element={<Wishlist />} />
         </Route>
 
         {/* Admin route */}

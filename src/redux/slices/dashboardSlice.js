@@ -79,8 +79,29 @@ export const dashboardSlice = createSlice({
             state.loading = false;
             state.message = action.payload;
         },
-
         deleteUserReject: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
+        deleteProductRequest: (state) => {
+            state.loading = true;
+        },
+        deleteProductSuccess: (state, action) => {
+            state.loading = false;
+            state.message = action.payload;
+        },
+        deleteProductReject: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        },
+        updateFeaturedReqest: (state) => {
+            state.loading = true;
+        },
+        updateFeaturedSuccess: (state, action) => {
+            state.loading = false;
+            state.message = action.payload.message;
+        },
+        updateFeaturedReject: (state, action) => {
             state.loading = false;
             state.error = action.payload;
         },
@@ -97,6 +118,7 @@ export const { getDashboardStatRequest, getDashboardStatSuccess, getDashboardSta
     addProductReject, addProductRequest, addProductSuccess, getAllProductsRequest,
     updateProductReject, updateProductRequest, updateProductSuccess, getAllProductsSuccess,
     clearError, clearMessage, changeUserRoleReject, changeUserRoleRequest, changeUserRoleSuccess,
-    deleteUserReject, deleteUserRequest, deleteUserSuccess } = dashboardSlice.actions;
+    deleteUserReject, deleteUserRequest, deleteUserSuccess, deleteProductReject, deleteProductRequest, updateFeaturedReject
+    ,updateFeaturedReqest, updateFeaturedSuccess, deleteProductSuccess } = dashboardSlice.actions;
 
 export default dashboardSlice.reducer;

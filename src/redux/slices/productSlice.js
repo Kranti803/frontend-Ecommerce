@@ -6,14 +6,6 @@ export const productSlice = createSlice({
     name: 'products',
     initialState,
     reducers: {
-        getAllProductsRequest: () => {
-        },
-        getAllProductsSuccess: () => {
-
-        },
-        getAllProductsFailure: () => {
-
-        },
         getSingleProductRequest: (state) => {
             state.loading = true;
         },
@@ -46,6 +38,7 @@ export const productSlice = createSlice({
             state.loading = false;
             state.error = action.payload;
         },
+     
         clearError: (state) => {
             state.error = null;
         },

@@ -46,4 +46,4 @@ export const persistor = persistStore(store);
 
 
 //base url
-export const serverUrl = 'http://localhost:8000/api/v1';
+export const serverUrl = 'https://exclusive-exes.onrender.com/api/v1';

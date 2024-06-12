@@ -3,6 +3,7 @@ import { addProduct } from "../../../redux/thunks/dashboardThunk";
 import { useDispatch, useSelector } from "react-redux";
 import { clearError, clearMessage } from "../../../redux/slices/dashboardSlice";
 import { toast } from "react-toastify";
+import LoadingButton from "../../Layouts/LoadingButton";
 
 const AddProduct = () => {
   const [image, setImage] = useState("");
@@ -23,12 +24,11 @@ const AddProduct = () => {
     reader.readAsDataURL(file);
 
     reader.onloadend = () => {
-      console.log(file);
       setImage(file);
     };
   };
 
-  const { error, message } = useSelector((state) => state.dashboard);
+  const { error, message, loading } = useSelector((state) => state.dashboard);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -113,12 +113,21 @@ const AddProduct = () => {
             placeholder="Select Product Image"
             className="bg-[#f4f4f4] px-4 py-3 outline-[#e05607] rounded-sm file:bg-[#e05607] file:border-none file:flex file:justify-center file:w-full file:text-white file:py-2 file:rounded-sm "
           />
-          <button
-            type="submit"
-            className="w-full p-2 bg-[#e05607] text-white rounded-sm"
-          >
-            Add Product
-          </button>
+
+          {loading ? (
+            <LoadingButton
+              className={
+                "flex w-full justify-center rounded-sm bg-[#e05607] px-3 py-1.5 text-sm font-semibold leading-6 text-white border-none outline-none text-[poppins]"
+              }
+            />
+          ) : (
+            <button
+              type="submit"
+              className="w-full p-2 bg-[#e05607] text-white rounded-sm"
+            >
+              Add Product
+            </button>
+          )}
         </form>
       </div>
     </section>

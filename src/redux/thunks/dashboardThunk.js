@@ -1,7 +1,7 @@
 import {
-    addProductReject, addProductRequest, addProductSuccess, changeUserRoleReject, changeUserRoleRequest, changeUserRoleSuccess, deleteUserReject,
+    addProductReject, addProductRequest, addProductSuccess, changeUserRoleReject, changeUserRoleRequest, changeUserRoleSuccess, deleteProductReject, deleteProductRequest, deleteProductSuccess, deleteUserReject,
     deleteUserRequest, deleteUserSuccess, getAllProductsReject, getAllProductsSuccess, getAllUsersReject, getAllUsersRequest, getAllUsersSuccess,
-    getDashboardStatReject, getDashboardStatRequest, getDashboardStatSuccess, updateProductReject, updateProductRequest, updateProductSuccess
+    getDashboardStatReject, getDashboardStatRequest, getDashboardStatSuccess, updateFeaturedReject, updateFeaturedReqest, updateFeaturedSuccess, updateProductReject, updateProductRequest, updateProductSuccess
 } from "../slices/dashboardSlice";
 import { serverUrl } from "../store";
 import axios from 'axios';
@@ -72,9 +72,20 @@ export const updateProduct = (myFormData, id) => async (dispatch) => {
             withCredentials: true
         })
         dispatch(updateProductSuccess(data?.message));
-        console.log(data)
     } catch (error) {
         dispatch(updateProductReject(error?.response?.data?.message));
+    }
+}
+//delete product
+export const deleteProduct = (id) => async (dispatch) => {
+    try {
+        dispatch(deleteProductRequest());
+        const { data } = await axios.delete(`${serverUrl}/admin/deleteproduct/${id}`, {
+            withCredentials: true
+        })
+        dispatch(deleteProductSuccess(data?.message));
+    } catch (error) {
+        dispatch(deleteProductReject(error?.response?.data?.message));
     }
 }
 
@@ -104,3 +115,17 @@ export const changeRole = (id) => async (dispatch) => {
     }
 };
 
+
+//update product featured
+export const updateProductFeatured = (id) => async (dispatch) => {
+    try {
+        dispatch(updateFeaturedReqest());
+        const { data } = await axios.put(`${serverUrl}/admin/change_featured/${id}`, {}, {
+            withCredentials: true
+        });
+        dispatch(updateFeaturedSuccess(data));
+    } catch (error) {
+        dispatch(updateFeaturedReject(error?.response?.data?.message))
+    }
+
+}

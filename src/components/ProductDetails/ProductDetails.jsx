@@ -87,11 +87,8 @@ const ProductDetails = () => {
             </p>
           </div>
           <div className="flex justify-center flex-col gap-y-4 items-center my-2 mt-6">
-            <button className="text-sm w-full md:w-1/2 bg-[#DB4444] text-white font-[inter] px-4 py-2 rounded-sm">
-              Buy Now
-            </button>
             <button
-              className="text-sm w-full md:w-1/2 bg-[#1e1e1e] text-white font-[inter] px-4 py-2 rounded-sm flex justify-center items-center gap-x-2"
+              className="text-sm w-full md:w-1/2 bg-[#DB4444] text-white font-[inter] px-4 py-2 rounded-sm flex justify-center items-center gap-x-2"
               onClick={() => dispatch(addToCart(id))}
             >
               Add To Cart

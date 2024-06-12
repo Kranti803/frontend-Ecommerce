@@ -1,6 +1,7 @@
 import React from "react";
 import aboutImg from "../../assets/aboutImg.png";
 import Services from "./../Home/Services";
+
 const About = () => {
   return (
     <section className="min-h-screen p-4 lg:p-0 lg:w-[80%] m-auto mt-4">

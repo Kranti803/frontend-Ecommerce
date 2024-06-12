@@ -1,8 +1,9 @@
-import {React,useEffect,useState} from "react";
+import { React, useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import { FaArrowRight } from "react-icons/fa6";
 import { FaArrowLeft } from "react-icons/fa6";
-import axios from 'axios';
+import axios from "axios";
+import { serverUrl } from "../../redux/store";
 
 const SalesProducts = () => {
   const slideLeft = () => {
@@ -19,7 +20,7 @@ const SalesProducts = () => {
   const getProducts = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:8000/api/v1/get_all_products?search=&category=&startPrice=&endPrice=&rating="
+        `${serverUrl}/get_all_products?search=&category=`
       );
       setProducts(data?.products);
     } catch (error) {
@@ -30,6 +31,11 @@ const SalesProducts = () => {
   useEffect(() => {
     getProducts();
   }, []);
+
+  const featuredProducts = [...products].filter(
+    (item) => item.featured === true
+  );
+
   return (
     <section className="pt-4 px-[6px]">
       <div className="flex items-center justify-between pb-4">
@@ -38,7 +44,9 @@ const SalesProducts = () => {
             <span className="h-[20px] w-[20px] bg-[#DB4444]"></span>
             <span className="text-xs font-bold text-[#DB4444]">Today's</span>
           </div>
-          <h3 className=" text-2xl md:text-[28px] font-[Inter]">Flash Sales</h3>
+          <h3 className=" text-2xl md:text-[28px] font-[Inter]">
+            Featured Products
+          </h3>
         </div>
         <div className="hidden md:flex gap-4">
           <button
@@ -59,7 +67,7 @@ const SalesProducts = () => {
         id="slider_container"
         className=" flex gap-8 overflow-x-scroll scroll-smooth no-scrollbar"
       >
-        {products?.map((product) => (
+        {featuredProducts?.map((product) => (
           <ProductCard
             id={product?._id}
             key={product?._id}

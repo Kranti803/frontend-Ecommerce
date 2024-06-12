@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FaRegHeart } from "react-icons/fa";
-import { IoIosSearch, IoMdClose } from "react-icons/io";
+import { IoMdClose } from "react-icons/io";
+import { IoSearch } from "react-icons/io5";
 import { BsCart3 } from "react-icons/bs";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { navLinks } from "../../constants";
@@ -33,7 +33,7 @@ const Header = () => {
   };
 
   return (
-    <nav className="flex items-center justify-between h-[70px] px-[6px] md:px-2">
+    <nav className="flex items-center justify-between h-[70px] px-[6px] md:px-4">
       <h2 className=" hidden md:block text-[18px] md:text-[24px] font-[700] font-[Inter]">
         Exclusive
       </h2>
@@ -64,19 +64,9 @@ const Header = () => {
           </li>
         )}
       </ul>
-      <aside className="flex gap-2 sm:gap-4">
-        <div className="flex gap-1 w-full rounded-sm bg-[#F5F5F5] p-2">
-          <input
-            className=" text-xs outline-none bg-transparent w-full"
-            type="text"
-            placeholder="Search products"
-          />
-          <button>
-            <IoIosSearch />
-          </button>
-        </div>
-        <Link to={"/wishlist"} className="flex items-center">
-          <FaRegHeart size={20} />
+      <aside className="flex gap-2 sm:gap-6">
+        <Link to={'/allproducts'}>
+          <IoSearch size={20} />
         </Link>
         <Link to={"/cart"} className="relative flex items-center">
           <BsCart3 size={20} />

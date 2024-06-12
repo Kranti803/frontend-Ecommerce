@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { updateUserProfile } from "../../redux/thunks/userThunk";
 import { toast } from "react-toastify";
 import { clearError, clearMessage } from "../../redux/slices/userSlice";
+import LoadingButton from "./../Layouts/LoadingButton";
 
 const User = () => {
   const [formData, setFormData] = useState({
@@ -20,7 +21,7 @@ const User = () => {
 
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  const { error, message, updatedUser } = useSelector((state) => state.user);
+  const { error, message, updatedUser,loading } = useSelector((state) => state.user);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -134,12 +135,21 @@ const User = () => {
               />
             </div>
           </div>
-          <button
-            type="submit"
-            className="px-3 py-2 text-white font-[Inter] rounded-sm bg-[#DB4444] w-full border-none outline-none mt-4"
-          >
-            Update Profile
-          </button>
+
+          {loading ? (
+            <LoadingButton
+              className={
+                "flex w-full justify-center rounded-sm bg-[#BB4444] px-3 py-2 mt-4 text-sm font-semibold leading-6 text-white border-none outline-none text-[poppins]"
+              }
+            />
+          ) : (
+            <button
+              type="submit"
+              className="px-3 py-2 text-white font-[Inter] rounded-sm bg-[#DB4444] w-full border-none outline-none mt-4"
+            >
+              Update Profile
+            </button>
+          )}
         </form>
       </div>
     </section>

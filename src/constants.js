@@ -25,6 +25,59 @@ export const navLinks = [
 
 ];
 
+export const productCategories = [
+    {
+        id: 1,
+        name: "Mobiles",
+    },
+    {
+        id: 2,
+        name: "Laptop",
+    },
+    {
+        id: 3,
+        name: "Watch",
+    },
+    {
+        id: 4,
+        name: "Camera",
+    },
+    {
+        id: 5,
+        name: "Headphone",
+    },
+    {
+        id: 6,
+        name: "TV",
+    },
+
+
+];
+
+export const productBrands = [
+    {
+        id: 1,
+        name: "Samsung",
+    },
+    {
+        id: 2,
+        name: "Apple",
+    },
+    {
+        id: 3,
+        name: "Xiaomi",
+    },
+    {
+        id: 4,
+        name: "Oneplus",
+    },
+    {
+        id: 5,
+        name: "Nokia",
+    },
+
+];
+
 export const sidebarLinks = [
     {
         id: 1,
