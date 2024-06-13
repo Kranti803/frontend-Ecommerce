@@ -4,6 +4,8 @@ import { FaArrowRight } from "react-icons/fa6";
 import { FaArrowLeft } from "react-icons/fa6";
 import axios from "axios";
 import { serverUrl } from "../../redux/store";
+import Loader from "../Layouts/Loader";
+import { useSelector } from "react-redux";
 
 const SalesProducts = () => {
   const slideLeft = () => {
@@ -36,6 +38,8 @@ const SalesProducts = () => {
     (item) => item.featured === true
   );
 
+  const { loading } = useSelector((state) => state.auth);
+  if (loading) return <Loader />;
   return (
     <section className="pt-4 px-[6px]">
       <div className="flex items-center justify-between pb-4">

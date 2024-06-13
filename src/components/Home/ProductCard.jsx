@@ -8,15 +8,17 @@ import { addToCart } from "../../redux/thunks/cartThunk";
 const ProductCard = ({ title, image, price, rating, id }) => {
   const dispatch = useDispatch();
 
-
   return (
-    <div className="max-w-[250px] h-[400px] font-[poppins] relative flex-shrink-0">
+    <div className="w-[250px] h-[400px] font-[poppins] relative flex-shrink-0">
       <div className="h-[250px] w-full bg-[#F5F5F5]">
-        <img
-          src={image}
-          alt=""
-          className="w-full h-full object-cover p-8 bg-inherit"
-        />
+        <Link  to={`/productdetails/${id}`}>
+          <img
+            src={image}
+            alt=""
+            className="w-[80%] h-[80%] object-cover m-auto bg-inherit"
+          />
+        </Link>
+
         <button
           className="bg-[#DB4444] text-white w-full text-sm py-2"
           onClick={() => dispatch(addToCart(id))}

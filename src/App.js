@@ -52,7 +52,7 @@ function App() {
   return (
     <Router>
       <Header />
-      <ToastContainer position="bottom-right" />
+      <ToastContainer position="top-left" />
       <Routes>
 
         {/* public routes  */}

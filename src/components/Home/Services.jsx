@@ -24,7 +24,7 @@ const Services = () => {
     },
   ];
   return (
-    <section className="grid max-[280px]:grid-cols-1 grid-cols-2 md:grid-cols-3 gap-3 px-2 my-14">
+    <section className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-3 px-2 my-10">
       {services.map((item) => (
         <div
           className="font-[poppins] flex items-center flex-col gap-2"

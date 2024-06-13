@@ -107,7 +107,7 @@ const AllProducts = () => {
           </select>
         </div>
       </div>
-      <div className="grid place-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 my-8">
+      <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 place-items-center gap-8 my-8">
         {sortedProducts.length > 0
           ? sortedProducts.map((item) => (
               <ProductCard
@@ -131,7 +131,11 @@ const AllProducts = () => {
             ))}
       </div>
       <div>
-        <Pagination totalProducts={totalProducts} setPage={setPage} />
+        {products?.length > 0 ? (
+          <Pagination totalProducts={totalProducts} setPage={setPage} />
+        ) : (
+          <h1 className="text-md text-center">No Products found !!!</h1>
+        )}
       </div>
     </section>
   );

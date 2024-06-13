@@ -3,6 +3,8 @@ import ProductCard from "./ProductCard";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { serverUrl } from "../../redux/store";
+import { useSelector } from "react-redux";
+import Loader from './../Layouts/Loader';
 
 const ExploreProducts = () => {
   const [products, setProducts] = useState([]);
@@ -20,6 +22,9 @@ const ExploreProducts = () => {
     getProducts();
   }, []);
 
+  const { loading } = useSelector((state) => state.auth);
+  if (loading) return <Loader />;
+
   return (
     <section className="pt-4 px-[6px]">
       <div className="flex items-center justify-between pb-4">
@@ -35,7 +40,8 @@ const ExploreProducts = () => {
           </h3>
         </div>
       </div>
-      <div className="grid max-[280px]:grid-cols-1 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 place-items-center gap-8">
+      {/* <div className="grid max-[280px]:grid-cols-1 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 place-items-center gap-8"> */}
+      <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 place-items-center gap-8">
         {products?.map((product) => (
           <ProductCard
             id={product?._id}
