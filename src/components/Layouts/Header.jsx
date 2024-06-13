@@ -32,6 +32,13 @@ const Header = () => {
     dispatch(logoutUser());
   };
 
+  //stopping scroll when the navbar is open.....
+  if (nav === true) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
+  
   return (
     <nav className="flex items-center justify-between h-[70px] px-[6px] md:px-4">
       <h2 className=" hidden md:block text-[18px] md:text-[24px] font-[700] font-[Inter]">
