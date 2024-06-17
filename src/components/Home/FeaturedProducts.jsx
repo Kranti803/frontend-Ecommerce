@@ -75,7 +75,6 @@ const SalesProducts = () => {
           <ProductCard
             id={product?._id}
             key={product?._id}
-            inde
             title={product?.title}
             image={product?.productImage?.url}
             price={product?.price}
